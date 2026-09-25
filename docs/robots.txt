@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://omnitools-th.github.io/wongmaingiap/sitemap.xml
