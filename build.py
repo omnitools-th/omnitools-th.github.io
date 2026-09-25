@@ -558,6 +558,8 @@ def main():
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "src" / "assets", OUT / "assets")
+    # ไฟล์ที่ต้องอยู่ที่ root ของเว็บตามเดิม เช่น ไฟล์ยืนยัน Google Search Console
+    shutil.copytree(ROOT / "static", OUT, dirs_exist_ok=True)
     index_page()
     for t in TOOLS:
         tool_page(t)
