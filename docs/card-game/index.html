@@ -24,6 +24,7 @@
 <nav class="crumb"><a href="../">วงไม่เงียบ</a> › ไพ่วงเหล้า</nav>
 <h1>🃏 ไพ่วงเหล้า</h1>
 <p class="lead">วางมือถือไว้กลางวง ผลัดกันแตะเปิดไพ่ทีละใบ แล้วทำตามกติกาของไพ่ใบนั้น</p>
+<div class="vibes" role="group" aria-label="เลือกสายของเกม"><span class="vibes-label">สาย:</span><button type="button" data-vibe="fun">😂 ฮา</button><button type="button" data-vibe="spicy">🔥 ทะลึ่ง</button><button type="button" data-vibe="drink">🍻 กิน</button><button type="button" data-vibe="deep">💔 เจาะใจ</button><button type="button" data-vibe="couple">💑 คู่รัก</button><button type="button" data-vibe="all">🎲 รวม</button></div><p class="note vibe-note">เกมนี้ใช้กติกาเดิมทุกสาย แต่ถ้าเลือกสายกิน จำนวนจิบจะเพิ่มเป็น 2 เท่า</p>
 <div class="stage"><div class="turn" id="turn"></div><button class="playcard" id="card" type="button"></button><div class="rule" id="rule" aria-live="polite"></div><div class="meta"><span id="left"></span><span id="kings"></span></div><div class="row"><button class="btn big" id="draw" type="button">เปิดใบต่อไป</button><button class="btn ghost" id="reset" type="button">สับไพ่ใหม่</button></div></div><details class="panel"><summary>✏️ แก้ไขกติกาไพ่แต่ละใบ</summary><div id="ruleEdit"></div><p class="note">ใส่ <code>{pen1}</code> ตรงที่ต้องการให้แสดงบทลงโทษ ระบบจะเปลี่ยนเป็น “ดื่ม 1 จิบ” หรือภารกิจตามโหมดให้เอง</p><button class="btn ghost" id="ruleReset" type="button">คืนค่ากติกาเริ่มต้น</button></details>
 <details class="panel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary><div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off"><button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div><p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>
 <section class="prose"><h2>กติกาไพ่วงเหล้า (ค่าเริ่มต้น)</h2>
@@ -39,6 +40,6 @@
 <p><a href="../">ดูเกมทั้งหมด 12 เกม →</a></p></section>
 </main>
 <footer><div class="wrap"><span class="warn-line">⚠️ ดื่มอย่างรับผิดชอบ · เมาไม่ขับ · ห้ามจำหน่ายและให้บริการแก่ผู้มีอายุต่ำกว่า 20 ปี · ถ้าไม่ดื่ม เลือกโหมด “ไม่ดื่ม” ได้ทุกเกม</span><span>© 2569 วงไม่เงียบ · รวมเกมวงเหล้า เกมปาร์ตี้ เล่นบนมือถือเครื่องเดียว · <a href="../about/">เกี่ยวกับเรา</a> · <a href="../privacy/">นโยบายความเป็นส่วนตัว</a></span></div></footer>
-<script src="../assets/data.js" defer></script><script src="../assets/app.js" defer></script><script src="../assets/games.js" defer></script>
+<script src="../assets/data.js" defer></script><script src="../assets/packs.js" defer></script><script src="../assets/app.js" defer></script><script src="../assets/games.js" defer></script>
 </body>
 </html>

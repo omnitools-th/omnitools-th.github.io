@@ -1,5 +1,5 @@
-const CACHE = 'wmg-31211ad9c5';
-const FILES = ["./", "about/", "card-game/", "charades/", "drinking-dice/", "finger-chooser/", "most-likely/", "never-have-i-ever/", "number-bomb/", "penalty-wheel/", "privacy/", "spin-the-bottle/", "time-bomb/", "truth-or-dare/", "would-you-rather/", "assets/app.js", "assets/data.js", "assets/games.js", "assets/style.css", "icon.svg", "manifest.json"];
+const CACHE = 'wmg-9357af9d6a';
+const FILES = ["./", "about/", "card-game/", "charades/", "couple/", "deep-talk/", "drink-hard/", "drinking-dice/", "finger-chooser/", "funny/", "most-likely/", "never-have-i-ever/", "number-bomb/", "penalty-wheel/", "privacy/", "spicy/", "spin-the-bottle/", "time-bomb/", "truth-or-dare/", "would-you-rather/", "assets/app.js", "assets/data.js", "assets/games.js", "assets/packs.js", "assets/style.css", "icon.svg", "manifest.json"];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {

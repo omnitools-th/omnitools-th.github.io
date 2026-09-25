@@ -254,3 +254,24 @@ footer a { color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ---------- สายเกม ---------- */
+.vibes { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; margin: 0 -2px 4px; scrollbar-width: none; align-items: center; }
+.vibes::-webkit-scrollbar { display: none; }
+.vibes-label { color: var(--muted); font-size: .9rem; flex: none; }
+.vibes button { flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 7px 14px; cursor: pointer; font-size: .95rem; white-space: nowrap; }
+.vibes button[aria-pressed="true"] { background: var(--yellow); color: #2a2000; border-color: var(--yellow); font-weight: 600; }
+.vibe-note { margin: -4px 0 10px; }
+.vibe-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.vibe-card { display: grid; gap: 2px; padding: 14px; border-radius: 18px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); background: var(--surface); transition: transform .15s; }
+.vibe-card:hover { transform: translateY(-2px); }
+.vibe-card b { font-size: 1.8rem; line-height: 1.2; }
+.vibe-card strong { font: 600 1.1rem Kanit, sans-serif; }
+.vibe-card span { color: var(--muted); font-size: .85rem; }
+.v-fun { background: linear-gradient(160deg, #3a3000, var(--surface) 70%); }
+.v-spicy { background: linear-gradient(160deg, #4a0f25, var(--surface) 70%); }
+.v-drink { background: linear-gradient(160deg, #3d2600, var(--surface) 70%); }
+.v-deep { background: linear-gradient(160deg, #102a4a, var(--surface) 70%); }
+.v-couple { background: linear-gradient(160deg, #3d1240, var(--surface) 70%); }
+.chip-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-link { padding: 6px 14px; border-radius: 999px; background: var(--surface2); color: var(--ink); text-decoration: none; }

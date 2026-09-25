@@ -7,7 +7,7 @@
 
   // ---------- ตั้งค่าที่จำไว้ในเครื่อง ----------
   const KEY = 'wmg-v1';
-  let S = { mode: 'drink', players: [] };
+  let S = { mode: 'drink', vibe: 'fun', adult: false, players: [] };
   try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) { /* ใช้ค่าเริ่มต้น */ }
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } };
 
@@ -25,7 +25,7 @@
   const softBag = () => bag(window.WD ? window.WD.softPen : ['ทำภารกิจที่วงเลือก']);
   let nextSoft = null;
   function pen(n = 1) {
-    if (S.mode === 'drink') return n >= 99 ? 'หมดแก้ว!' : `ดื่ม ${n} จิบ`;
+    if (S.mode === 'drink') return n >= 99 ? 'หมดแก้ว!' : `ดื่ม ${S.vibe === 'drink' ? n * 2 : n} จิบ`;
     if (!nextSoft) nextSoft = softBag();
     return nextSoft();
   }
@@ -90,6 +90,39 @@
     document.dispatchEvent(new CustomEvent('modechange'));
   });
 
+  // ---------- สายเกม ----------
+  const VIBE_NAMES = { fun: 'ฮา', spicy: 'ทะลึ่ง', drink: 'กิน', deep: 'เจาะใจ', couple: 'คู่รัก', all: 'รวมทุกสาย' };
+  function setVibe(v) {
+    if (!VIBE_NAMES[v]) v = 'fun';
+    if (v === 'spicy' && !S.adult) {
+      if (!window.confirm('สายทะลึ่งสำหรับผู้ที่มีอายุ 20 ปีขึ้นไปเท่านั้น\nยืนยันว่าทุกคนในวงอายุ 20 ปีขึ้นไป?')) return false;
+      S.adult = true;
+    }
+    S.vibe = v; save(); renderVibe();
+    document.dispatchEvent(new CustomEvent('vibechange'));
+    return true;
+  }
+  function renderVibe() {
+    $$('button[data-vibe]').forEach((b) => {
+      const on = b.dataset.vibe === S.vibe;
+      b.setAttribute('aria-pressed', String(on));
+      // เลื่อนแถบให้เห็นสายที่เลือก (จอมือถือแคบ)
+      if (on && b.parentElement) b.parentElement.scrollLeft = b.offsetLeft - b.parentElement.clientWidth / 2 + b.offsetWidth / 2;
+    });
+    $$('.vibe-name').forEach((e) => { e.textContent = VIBE_NAMES[S.vibe]; });
+    document.documentElement.dataset.sai = S.vibe;
+  }
+  // ชุดคำถามตามสายที่เลือก
+  function bank(kind) {
+    const P = (window.WD && window.WD.packs) || {};
+    if (S.vibe === 'all') return Object.keys(P).filter((k) => k !== 'spicy' || S.adult).flatMap((k) => P[k][kind] || []);
+    return (P[S.vibe] || P.fun || {})[kind] || [];
+  }
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-vibe]');
+    if (b) setVibe(b.dataset.vibe);
+  });
+
   // ---------- ติดตั้งเป็นแอป ----------
   let deferred = null;
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; $$('[data-install]').forEach((b) => { b.hidden = false; }); });
@@ -101,10 +134,13 @@
     window.addEventListener('load', () => { navigator.serviceWorker.register($('link[rel=manifest]') ? new URL('sw.js', $('link[rel=manifest]').href).href : 'sw.js').catch(() => {}); });
   }
 
-  window.W = { $, $$, esc, S, save, rand, pick, shuffle, bag, pen, penText, tone, boom, ding, buzz, keepAwake, players, nextPlayer, games: {} };
+  window.W = { $, $$, esc, S, save, bank, setVibe, rand, pick, shuffle, bag, pen, penText, tone, boom, ding, buzz, keepAwake, players, nextPlayer, games: {} };
 
   document.addEventListener('DOMContentLoaded', () => {
+    const qv = new URLSearchParams(location.search).get('vibe');
+    if (qv && qv !== S.vibe) setVibe(qv);
     renderMode();
+    renderVibe();
     renderPlayers();
     const add = $('#addPlayer'), inp = $('#playerName');
     if (add && inp) {

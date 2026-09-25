@@ -44,7 +44,7 @@ BOTTLE = ('<svg id="bottle" viewBox="0 0 60 200" aria-hidden="true"><defs><linea
 # ------------------------------------------------------------------ เกม
 GAMES = [
     dict(
-        slug="card-game", game="cards", icon="🃏", badge="ยอดนิยม", players=True,
+        slug="card-game", vibes=True, vibe_note="เกมนี้ใช้กติกาเดิมทุกสาย แต่ถ้าเลือกสายกิน จำนวนจิบจะเพิ่มเป็น 2 เท่า", game="cards", icon="🃏", badge="ยอดนิยม", players=True,
         name="ไพ่วงเหล้า", card="เปิดไพ่ทีละใบ แต่ละใบมีกติกา แก้กติกาเองได้",
         title="เกมไพ่วงเหล้า กติกาไพ่แต่ละใบ เล่นบนมือถือไม่ต้องมีไพ่จริง",
         desc="เกมไพ่วงเหล้าบนมือถือ เปิดไพ่ทีละใบพร้อมกติกา A ถึง K ครบ ไม่ต้องพกไพ่จริง แก้ไขกติกาเองได้ มีโหมดไม่ดื่มสำหรับเล่นกับทุกคน",
@@ -68,7 +68,7 @@ GAMES = [
              ("ไม่อยากดื่มเล่นได้ไหม?", "ได้ กดปุ่ม “ไม่ดื่ม” มุมขวาบน บทลงโทษจะเปลี่ยนเป็นภารกิจตลกๆ แทน")],
     ),
     dict(
-        slug="truth-or-dare", game="truth-dare", icon="😈", badge="ยอดนิยม", players=True,
+        slug="truth-or-dare", vibes=True, game="truth-dare", icon="😈", badge="ยอดนิยม", players=True,
         name="จริงหรือกล้า", card="คำถามจริงใจ 45+ ข้อ ภารกิจกล้า 40+ ข้อ",
         title="เกมจริงหรือกล้า (Truth or Dare) ภาษาไทย คำถามเยอะ เล่นในวงเหล้า",
         desc="เกมจริงหรือกล้า Truth or Dare ภาษาไทย สุ่มคำถามจริงและภารกิจกล้าไม่ซ้ำ เล่นบนมือถือในวงเหล้า ปาร์ตี้ หรือกับแฟน ไม่ตอบต้องโดนลงโทษ",
@@ -85,7 +85,7 @@ GAMES = [
              ("คำถามซ้ำไหม?", "ไม่ซ้ำจนกว่าจะเล่นครบทุกข้อ แล้วระบบจะสับใหม่")],
     ),
     dict(
-        slug="spin-the-bottle", game="bottle", icon="🍾", badge="ยอดนิยม",
+        slug="spin-the-bottle", vibes=True, vibe_note="เกมนี้ใช้กติกาเดิมทุกสาย แต่ถ้าเลือกสายกิน จำนวนจิบจะเพิ่มเป็น 2 เท่า", game="bottle", icon="🍾", badge="ยอดนิยม",
         name="หมุนขวด", card="วางมือถือกลางวง แตะเพื่อหมุน ปากขวดชี้ใครคนนั้นโดน",
         title="เกมหมุนขวดออนไลน์ บนมือถือ วางกลางวงแล้วหมุน",
         desc="เกมหมุนขวดบนมือถือ วางโทรศัพท์ไว้กลางวงแล้วแตะหมุน ปากขวดชี้ใครคนนั้นต้องดื่มหรือเล่นจริงหรือกล้า มีเสียงและการสั่น ไม่ต้องใช้ขวดจริง",
@@ -152,7 +152,7 @@ GAMES = [
              ("ใช้บนคอมได้ไหม?", "ไม่ได้ ต้องใช้จอสัมผัสที่วางได้หลายนิ้ว")],
     ),
     dict(
-        slug="never-have-i-ever", game="never", icon="🙊",
+        slug="never-have-i-ever", vibes=True, game="never", icon="🙊",
         name="ฉันไม่เคย", card="อ่านประโยค “ฉันไม่เคย…” ใครเคยทำต้องโดน",
         title="เกมฉันไม่เคย (Never Have I Ever) ภาษาไทย 60+ ข้อ",
         desc="เกมฉันไม่เคย Never Have I Ever ภาษาไทย รวมคำถามกว่า 60 ข้อ อ่านประโยค ใครเคยทำต้องดื่ม เล่นบนมือถือ รู้ความลับเพื่อนในวง",
@@ -166,7 +166,7 @@ GAMES = [
              ("คำถามซ้ำไหม?", "ไม่ซ้ำจนกว่าจะเล่นครบทุกข้อ")],
     ),
     dict(
-        slug="most-likely", game="likely", icon="👉",
+        slug="most-likely", vibes=True, game="likely", icon="👉",
         name="ใครมีแนวโน้มที่สุด", card="นับ 1-2-3 ชี้พร้อมกัน คนโดนชี้เยอะสุดโดน",
         title="เกมใครมีแนวโน้มที่สุด (Most Likely To) ภาษาไทย ชี้พร้อมกัน",
         desc="เกมใครมีแนวโน้มที่สุด Most Likely To ภาษาไทย ทุกคนชี้พร้อมกันว่าใครในวงมีแนวโน้มจะทำเรื่องนั้นมากที่สุด คนที่ถูกชี้มากที่สุดต้องดื่ม",
@@ -178,7 +178,7 @@ GAMES = [
              ("เล่นกี่คนดี?", "ตั้งแต่ 4 คนขึ้นไปจะสนุก ยิ่งคนเยอะยิ่งลุ้น")],
     ),
     dict(
-        slug="would-you-rather", game="wyr", icon="⚖️",
+        slug="would-you-rather", vibes=True, game="wyr", icon="⚖️",
         name="อันไหนดีกว่ากัน", card="เลือกระหว่าง 2 ทาง ฝั่งเสียงน้อยโดน",
         title="เกมอันไหนดีกว่ากัน (Would You Rather) ภาษาไทย 2 ตัวเลือก",
         desc="เกมอันไหนดีกว่ากัน Would You Rather ภาษาไทย เลือกระหว่างสองทางยากๆ ทุกคนเลือกพร้อมกัน ฝั่งที่มีคนน้อยกว่าต้องดื่ม เกมเถียงกันสนุกในวง",
@@ -211,7 +211,7 @@ GAMES = [
              ("ใช้การเอียงมือถือได้ไหม?", "เวอร์ชันนี้ใช้การแตะจอซ้าย/ขวา ซึ่งแม่นกว่าและใช้ได้กับทุกรุ่น")],
     ),
     dict(
-        slug="drinking-dice", game="dice", icon="🎲",
+        slug="drinking-dice", vibes=True, vibe_note="เกมนี้ใช้กติกาเดิมทุกสาย แต่ถ้าเลือกสายกิน จำนวนจิบจะเพิ่มเป็น 2 เท่า", game="dice", icon="🎲",
         name="ลูกเต๋าวงเหล้า", card="ลูกแรกบอกว่าใคร ลูกที่สองบอกว่ากี่จิบ + โยนเหรียญ",
         title="ลูกเต๋าวงเหล้า ทอยลูกเต๋าออนไลน์ บอกว่าใครดื่ม กี่จิบ",
         desc="ลูกเต๋าวงเหล้าบนมือถือ ทอยลูกเต๋า 2 ลูก ลูกแรกบอกว่าใครโดน ลูกที่สองบอกว่ากี่จิบ ออกดับเบิลทอยต่อ พร้อมโยนเหรียญหัวก้อย",
@@ -225,7 +225,7 @@ GAMES = [
         faq=[("สุ่มจริงไหม?", "จริง ใช้ตัวสุ่มเชิงรหัสของเบราว์เซอร์ ทุกหน้ามีโอกาสเท่ากัน")],
     ),
     dict(
-        slug="penalty-wheel", game="wheel", icon="🎡",
+        slug="penalty-wheel", vibes=True, game="wheel", icon="🎡",
         name="วงล้อลงโทษ", card="หมุนวงล้อสุ่มบทลงโทษ แก้รายการเองได้",
         title="วงล้อลงโทษ สุ่มบทลงโทษในวงเหล้า หมุนวงล้อออนไลน์",
         desc="วงล้อลงโทษบนมือถือ หมุนสุ่มบทลงโทษในวงเหล้าหรือปาร์ตี้ แก้ไขรายการได้เอง มีชุดบทลงโทษแบบดื่มและแบบไม่ดื่ม",
@@ -238,6 +238,50 @@ GAMES = [
         faq=[("ใส่รายการได้กี่ข้อ?", "ไม่จำกัด แต่ถ้าเกิน 16 ข้อ ตัวหนังสือบนวงล้อจะเล็กลง")],
     ),
 ]
+
+
+# ------------------------------------------------------------------ สายเกม
+VIBES = [
+    dict(key="fun", tag="เล่นได้ทุกวง", icon="😂", name="ฮา", slug="funny",
+         title="เกมวงเหล้าสายฮา คำถามฮาๆ เล่นได้ทุกวง",
+         desc="รวมเกมวงเหล้าสายฮา คำถามจริงหรือกล้า ฉันไม่เคย ใครมีแนวโน้มที่สุด แบบขำๆ เล่นได้ทุกวง ทั้งเพื่อนสนิทและคนเพิ่งรู้จัก",
+         lead="สายเริ่มต้นที่เล่นได้กับทุกวง คำถามขำๆ ไม่ลึกเกินไป เหมาะเปิดวงหรือเล่นกับคนที่เพิ่งรู้จัก",
+         samples=["ถ้าถูกหวย 10 ล้าน จะบอกใครเป็นคนแรก", "ฉันไม่เคยนั่งรถผิดสาย", "ใครในวงมีแนวโน้มจะตายเป็นคนแรกในหนังผี",
+                  "เลียนแบบเสียงสัตว์ 3 ชนิดติดกัน", "มีแมว 10 ตัว หรือ มีหมา 10 ตัว"]),
+    dict(key="spicy", tag="20+ จีบกัน หยอกกัน", icon="🔥", name="ทะลึ่ง", slug="spicy", adult=True,
+         title="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้าแบบทะลึ่ง",
+         desc="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้า ฉันไม่เคย ใครมีแนวโน้ม เรื่องความรัก การจีบ และความลับหัวใจ ทะลึ่งพอขำ ไม่หยาบ เล่นบนมือถือ",
+         lead="คำถามเรื่องจีบ ความรัก และความลับหัวใจ ทะลึ่งพอให้วงกรี๊ด แต่ไม่หยาบคาย สำหรับผู้ที่อายุ 20 ปีขึ้นไป",
+         samples=["ในวงนี้ ใครที่คิดว่าจูบเก่งที่สุด", "ฉันไม่เคยจูบคนที่เพิ่งรู้จักวันเดียว", "ใครในวงมีแนวโน้มจะถูกขอไลน์คืนนี้",
+                  "จีบคนทางขวาด้วยมุกจีบที่เลี่ยนที่สุด", "แฟนหึงมาก หรือ แฟนไม่หึงเลย"]),
+    dict(key="drink", tag="ดื่มคูณสอง", icon="🍻", name="กิน", slug="drink-hard",
+         title="เกมวงเหล้าสายกิน บทลงโทษดื่มคูณสอง คำถามเรื่องเมา",
+         desc="เกมวงเหล้าสายกิน สำหรับวงที่พร้อมลุย บทลงโทษดื่มเป็น 2 เท่า คำถามเรื่องเมาและวีรกรรมตอนเมา ไพ่วงเหล้า วงล้อลงโทษ สายโหด",
+         lead="สำหรับวงที่พร้อมลุย บทลงโทษดื่มเป็น 2 เท่าทุกเกม คำถามเรื่องวีรกรรมตอนเมา แต่อย่าลืมดื่มน้ำเปล่าสลับด้วย",
+         samples=["ทำอะไรน่าอายที่สุดตอนเมา", "ฉันไม่เคยบอกว่า “ไม่ดื่มแล้ว” แล้วดื่มต่อ", "ใครในวงมีแนวโน้มจะพูดว่าแก้วสุดท้ายแล้วไม่จริง",
+                  "แข่งดื่มน้ำเปล่า 1 แก้วกับคนทางซ้าย", "ตื่นมาจำอะไรไม่ได้ หรือ ตื่นมาจำได้ทุกอย่างที่ทำ"]),
+    dict(key="deep", tag="คุยกันลึกๆ", icon="💔", name="เจาะใจ", slug="deep-talk",
+         title="เกมวงเหล้าสายเจาะใจ คำถามลึกซึ้ง คุยกับเพื่อนสนิท",
+         desc="เกมสายเจาะใจ คำถามลึกซึ้งสำหรับวงเพื่อนสนิท จริงหรือกล้า ฉันไม่เคย อันไหนดีกว่ากัน เรื่องความรัก ความฝัน ความกลัว ให้วงได้คุยกันจริงจัง",
+         lead="สำหรับวงเพื่อนสนิทที่อยากคุยกันจริงจัง เรื่องความฝัน ความรัก และสิ่งที่ไม่เคยพูด ดึกๆ แล้วเล่นสายนี้ดีที่สุด",
+         samples=["ถ้าบอกตัวเองตอนอายุ 15 ได้ 1 ประโยค จะบอกว่าอะไร", "ฉันไม่เคยรักใครข้างเดียวนานเกิน 1 ปี",
+                  "ใครในวงมีแนวโน้มจะยิ้มทั้งที่ข้างในเศร้า", "ขอบคุณคนในวงที่เคยช่วยคุณ พร้อมบอกเหตุผล",
+                  "รู้ความจริงที่เจ็บปวด หรือ อยู่กับคำโกหกที่มีความสุข"]),
+    dict(key="couple", tag="เล่นกับแฟน 2 คน", icon="💑", name="คู่รัก", slug="couple",
+         title="เกมคู่รัก คำถามคู่รัก จริงหรือกล้าสำหรับแฟน เล่น 2 คน",
+         desc="เกมสำหรับคู่รักเล่น 2 คน คำถามคู่รัก จริงหรือกล้าสำหรับแฟน ใครมีแนวโน้มจะงอนก่อน ฉันไม่เคย ช่วยให้รู้จักกันมากขึ้น เล่นบนมือถือเครื่องเดียว",
+         lead="เล่นกันสองคนกับแฟน ผลัดกันตอบคำถาม ท้าทายกันน่ารักๆ และได้รู้เรื่องที่ไม่เคยรู้ของอีกคน",
+         samples=["ช่วงไหนที่รู้ว่ารักอีกคนจริงๆ", "ฉันไม่เคยแอบอ่านแชตแฟน", "ในเราสองคน ใครมีแนวโน้มจะงอนก่อน",
+                  "พูดสิ่งที่รักในตัวอีกคน 5 ข้อ", "เดตที่บ้านดูหนัง หรือ เดตข้างนอกกินข้าวหรู"]),
+]
+VIBE_GAMES = ["truth-or-dare", "never-have-i-ever", "most-likely", "would-you-rather", "penalty-wheel"]
+
+
+def vibe_bar(note=""):
+    btns = ''.join(f'<button type="button" data-vibe="{v["key"]}">{v["icon"]} {v["name"]}</button>' for v in VIBES)
+    btns += '<button type="button" data-vibe="all">🎲 รวม</button>'
+    n = f'<p class="note vibe-note">{note}</p>' if note else ''
+    return f'<div class="vibes" role="group" aria-label="เลือกสายของเกม"><span class="vibes-label">สาย:</span>{btns}</div>{n}'
 
 
 # ------------------------------------------------------------------ แม่แบบ
@@ -283,7 +327,8 @@ def footer(root):
 
 
 def scripts(root):
-    return (f'<script src="{root}assets/data.js" defer></script><script src="{root}assets/app.js" defer></script>'
+    return (f'<script src="{root}assets/data.js" defer></script><script src="{root}assets/packs.js" defer></script>'
+            f'<script src="{root}assets/app.js" defer></script>'
             f'<script src="{root}assets/games.js" defer></script>')
 
 
@@ -318,6 +363,7 @@ def game_page(g):
 <nav class="crumb"><a href="{root}">{SITE_NAME}</a> › {g["name"]}</nav>
 <h1>{g["icon"]} {g["h1"]}</h1>
 <p class="lead">{g["lead"]}</p>
+{vibe_bar(g.get("vibe_note", "")) if g.get("vibes") else ''}
 {g["stage"]}
 {PLAYERS if g.get("players") else ''}
 <section class="prose">{g["how"]}</section>
@@ -350,6 +396,8 @@ def index_page():
 <div class="row" style="justify-content:flex-start"><a class="btn big" href="./card-game/">🃏 เริ่มด้วยไพ่วงเหล้า</a>
 <button class="btn alt" type="button" data-install hidden>📲 ติดตั้งลงมือถือ</button></div>
 </section>
+<h2>เลือกสายของวง</h2>
+<div class="vibe-cards">{''.join(f'<a class="vibe-card v-{v["key"]}" href="./{v["slug"]}/"><b>{v["icon"]}</b><strong>สาย{v["name"]}</strong><span>{v["tag"]}</span></a>' for v in VIBES)}</div>
 <h2>เลือกเกม</h2>
 {game_cards("./", GAMES)}
 <div class="setup-card"><h2>👥 ใส่ชื่อเพื่อนในวงไว้ก่อน</h2><p class="note">บางเกมจะบอกว่าถึงตาใคร ใส่ตามลำดับที่นั่งวนรอบวง</p>
@@ -369,6 +417,42 @@ def index_page():
 </html>
 """
     write("index.html", head(f"{SITE_NAME} – รวมเกมวงเหล้า เกมปาร์ตี้ เล่นบนมือถือ ฟรี", desc, SITE_URL + "/", "./", lds) + body)
+
+
+def vibe_page(v):
+    root, url = "../", f'{SITE_URL}/{v["slug"]}/'
+    games = [g for g in GAMES if g["slug"] in VIBE_GAMES or g.get("vibes")]
+    cards = '<div class="games">' + ''.join(
+        f'<a class="game" href="{root}{g["slug"]}/?vibe={v["key"]}"><span class="ic" aria-hidden="true">{g["icon"]}</span>'
+        f'<div><strong>{g["name"]}</strong><span>{g["card"]}</span></div></a>' for g in games) + '</div>'
+    samples = ''.join(f'<li>{html.escape(s)}</li>' for s in v["samples"])
+    others = ''.join(f'<a class="chip-link" href="{root}{o["slug"]}/">{o["icon"]} สาย{o["name"]}</a>' for o in VIBES if o is not v)
+    gate = ('<p class="warn-line">🔞 สายนี้สำหรับผู้ที่มีอายุ 20 ปีขึ้นไปเท่านั้น ทุกภารกิจที่แตะต้องตัวต้องได้รับความยินยอมจากอีกฝ่ายเสมอ</p>'
+            if v.get("adult") else '')
+    body = f"""
+<body>
+{header(root)}
+<main class="wrap">
+<nav class="crumb"><a href="{root}">{SITE_NAME}</a> › สาย{v["name"]}</nav>
+<h1>{v["icon"]} เกมวงเหล้าสาย{v["name"]}</h1>
+<p class="lead">{v["lead"]}</p>
+{gate}
+<h2>เลือกเกมที่จะเล่นในสาย{v["name"]}</h2>
+{cards}
+<section class="prose">
+<h2>ตัวอย่างคำถามสาย{v["name"]}</h2>
+<ul>{samples}</ul>
+<p>แตะเกมด้านบนเพื่อเริ่มเล่น ระบบจะเลือกสาย{v["name"]}ให้อัตโนมัติ และเปลี่ยนสายได้ตลอดจากแถบ “สาย” ในหน้าเกม ถ้าในวงมีคนไม่ดื่ม กดโหมด “ไม่ดื่ม” มุมขวาบนได้เลย</p>
+<h2>สายอื่นๆ</h2><div class="chip-links">{others}</div>
+</section>
+</main>
+{footer(root)}
+{scripts(root)}
+</body>
+</html>
+"""
+    lds = [{"@context": "https://schema.org", "@type": "CollectionPage", "name": v["title"], "url": url, "inLanguage": "th", "description": v["desc"]}]
+    write(f'{v["slug"]}/index.html', head(f'{v["title"]} | {SITE_NAME}', v["desc"], url, root, lds) + body)
 
 
 def simple_page(slug, title, content):
@@ -392,7 +476,7 @@ def static_pages():
 
 
 def seo_and_pwa():
-    urls = [SITE_URL + "/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
+    urls = [SITE_URL + "/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f'{SITE_URL}/{v["slug"]}/' for v in VIBES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + '</urlset>\n')
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
@@ -437,6 +521,8 @@ def main():
     index_page()
     for g in GAMES:
         game_page(g)
+    for v in VIBES:
+        vibe_page(v)
     static_pages()
     seo_and_pwa()
     print(f"สร้างเสร็จ {sum(1 for _ in OUT.rglob('*.html'))} หน้า -> {OUT}")

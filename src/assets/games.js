@@ -53,27 +53,33 @@
   };
 
   // ================================================================ เกมการ์ดคำถาม (ใช้ร่วม: ฉันไม่เคย / ใครมีแนวโน้ม)
-  function questionGame(items, render) {
-    const next = bag(items), q = $('#qcard'), turn = $('#turn');
+  // ข้อความคำถาม: escape แล้วแทน {pen} ด้วยบทลงโทษ
+  const qt = (s) => penText(esc(s));
+  function questionGame(kind, render) {
+    let next = bag(W.bank(kind));
+    const q = $('#qcard'), turn = $('#turn');
     const go = () => { q.innerHTML = render(next()); flash(q); tone(600, 0.05, 'triangle'); turnLabel(turn); };
     q.addEventListener('click', go);
     $('#next').addEventListener('click', go);
     document.addEventListener('modechange', go);
+    document.addEventListener('vibechange', () => { next = bag(W.bank(kind)); go(); });
     go();
   }
-  G.never = () => questionGame(D.never, (s) => `<p class="q">${esc(s)}</p><p class="hint">ใครเคย → ${penText('{pen1}')}</p>`);
-  G.likely = () => questionGame(D.likely, (s) => `<p class="tag">ใครในวงมีแนวโน้มจะ…</p><p class="q">${esc(s)}</p>` +
-    `<p class="hint">นับ 1-2-3 แล้วทุกคนชี้พร้อมกัน คนที่ถูกชี้มากที่สุด → ${penText('{pen2}')}</p>`);
-  G.wyr = () => questionGame(D.wyr, ([a, b]) => `<p class="tag">ถ้าต้องเลือก จะเลือกอะไร?</p>` +
-    `<div class="wyr"><span class="opt a">${esc(a)}</span><span class="or">หรือ</span><span class="opt b">${esc(b)}</span></div>` +
+  G.never = () => questionGame('never', (s) => `<p class="q">${qt(s)}</p><p class="hint">ใครเคย → ${penText('{pen1}')}</p>`);
+  G.likely = () => questionGame('likely', (s) => `<p class="tag">${S.vibe === 'couple' ? 'ในเราสองคน ใครมีแนวโน้มจะ…' : 'ใครในวงมีแนวโน้มจะ…'}</p><p class="q">${qt(s)}</p>` +
+    `<p class="hint">${S.vibe === 'couple' ? 'นับ 1-2-3 แล้วชี้พร้อมกัน คนที่ถูกชี้' : 'นับ 1-2-3 แล้วทุกคนชี้พร้อมกัน คนที่ถูกชี้มากที่สุด'} → ${penText('{pen2}')}</p>`);
+  G.wyr = () => questionGame('wyr', ([a, b]) => `<p class="tag">ถ้าต้องเลือก จะเลือกอะไร?</p>` +
+    `<div class="wyr"><span class="opt a">${qt(a)}</span><span class="or">หรือ</span><span class="opt b">${qt(b)}</span></div>` +
     `<p class="hint">นับ 1-2-3 ยกมือพร้อมกัน (มือซ้าย = บน, มือขวา = ล่าง) ฝั่งที่มีคนน้อยกว่า → ${penText('{pen1}')}</p>`);
 
   // ================================================================ จริงหรือกล้า
   G['truth-dare'] = () => {
-    const t = bag(D.truth), d = bag(D.dare), q = $('#qcard'), turn = $('#turn');
+    let t = bag(W.bank('truth')), d = bag(W.bank('dare'));
+    const q = $('#qcard'), turn = $('#turn');
+    document.addEventListener('vibechange', () => { t = bag(W.bank('truth')); d = bag(W.bank('dare')); q.innerHTML = '<p class="q dim">เปลี่ยนสายแล้ว เลือก “จริง” หรือ “กล้า”</p>'; });
     const show = (kind) => {
       const s = kind === 'truth' ? t() : d();
-      q.innerHTML = `<p class="tag ${kind}">${kind === 'truth' ? 'จริง' : 'กล้า'}</p><p class="q">${esc(s)}</p>` +
+      q.innerHTML = `<p class="tag ${kind}">${kind === 'truth' ? 'จริง' : 'กล้า'}</p><p class="q">${penText(esc(s))}</p>` +
         `<p class="hint">${kind === 'truth' ? 'ไม่ยอมตอบ' : 'ไม่กล้าทำ'} → ${penText('{pen2}')}</p>`;
       flash(q); tone(kind === 'truth' ? 520 : 780, 0.07, 'triangle');
     };
@@ -293,8 +299,11 @@
     const COLORS = ['#ff4d8d', '#35d0ff', '#ffd23f', '#7cff6b', '#b18cff', '#ff8a3d', '#4dffd2', '#ff5c5c'];
     const DRINK = ['ดื่ม 1 จิบ', 'ดื่ม 2 จิบ', 'ดื่มครึ่งแก้ว', 'รอด! ไม่ต้องทำอะไร', 'คนทางซ้ายดื่ม', 'คนทางขวาดื่ม', 'ทุกคนดื่ม!', 'เลือกใครก็ได้ดื่ม', 'เล่นจริงหรือกล้า', 'หมดแก้ว!'];
     const SOFT = () => shuffle(D.softPen).slice(0, 7).concat(['รอด! ไม่ต้องทำอะไร', 'เลือกเพื่อนให้ทำแทน', 'เล่นจริงหรือกล้า']);
-    const key = () => 'wmg-wheel-' + S.mode;
-    const load = () => { let v = null; try { v = localStorage.getItem(key()); } catch (e) { /* ignore */ } ta.value = v || (S.mode === 'drink' ? DRINK : SOFT()).join('\n'); draw(); };
+    const key = () => 'wmg-wheel-' + S.mode + '-' + S.vibe;
+    const own = () => (S.vibe !== 'all' && D.wheelPacks && D.wheelPacks[S.vibe]) || null;
+    const drinkList = () => own() || DRINK;
+    const softList = () => (own() || []).filter((x) => !/ดื่ม|แก้ว/.test(x)).concat(SOFT()).slice(0, 10);
+    const load = () => { let v = null; try { v = localStorage.getItem(key()); } catch (e) { /* ignore */ } ta.value = v || (S.mode === 'drink' ? drinkList() : softList()).join('\n'); draw(); };
     let rot = 0, spinning = false;
     const items = () => ta.value.split('\n').map((s) => s.trim()).filter(Boolean);
     function draw() {
@@ -337,6 +346,7 @@
     ta.addEventListener('input', () => { try { localStorage.setItem(key(), ta.value); } catch (e) { /* ignore */ } draw(); });
     $('#defaults').addEventListener('click', () => { try { localStorage.removeItem(key()); } catch (e) { /* ignore */ } load(); });
     document.addEventListener('modechange', load);
+    document.addEventListener('vibechange', load);
     if (document.fonts) document.fonts.ready.then(draw);
     load();
   };
