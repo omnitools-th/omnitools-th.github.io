@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คำนวณค่าโอนบ้าน ที่ดิน คอนโด ค่าจดจำนอง ภาษีธุรกิจเฉพาะ | คิดง่าย</title>
+<meta name="description" content="คำนวณค่าใช้จ่ายวันโอนบ้าน ที่ดิน คอนโด ครบทุกรายการ ค่าธรรมเนียมการโอน 2% ค่าจดจำนอง 1% ภาษีธุรกิจเฉพาะ 3.3% อากรแสตมป์ และภาษีหัก ณ ที่จ่าย">
+<link rel="canonical" href="https://kaveek1-rgb.github.io/kidngai/transfer-fee/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="คำนวณค่าโอนบ้าน ที่ดิน คอนโด ค่าจดจำนอง ภาษีธุรกิจเฉพาะ | คิดง่าย">
+<meta property="og:description" content="คำนวณค่าใช้จ่ายวันโอนบ้าน ที่ดิน คอนโด ครบทุกรายการ ค่าธรรมเนียมการโอน 2% ค่าจดจำนอง 1% ภาษีธุรกิจเฉพาะ 3.3% อากรแสตมป์ และภาษีหัก ณ ที่จ่าย">
+<meta property="og:url" content="https://kaveek1-rgb.github.io/kidngai/transfer-fee/">
+<meta property="og:site_name" content="คิดง่าย">
+<meta property="og:locale" content="th_TH">
+<meta name="theme-color" content="#0d6b5f">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' aria-hidden='true'><rect x='3' y='3' width='26' height='26' rx='7' fill='%230d6b5f' opacity='.12'/><rect x='3' y='3' width='26' height='26' rx='7' fill='none' stroke='%230d6b5f' stroke-width='2'/><path d='M10 12h5M12.5 9.5v5M18 12h5M10 20.5h5M18 19h5M18 22h5' stroke='%230d6b5f' stroke-width='2' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "ค่าโอนบ้าน / ที่ดิน / คอนโด", "url": "https://kaveek1-rgb.github.io/kidngai/transfer-fee/", "description": "คำนวณค่าใช้จ่ายวันโอนบ้าน ที่ดิน คอนโด ครบทุกรายการ ค่าธรรมเนียมการโอน 2% ค่าจดจำนอง 1% ภาษีธุรกิจเฉพาะ 3.3% อากรแสตมป์ และภาษีหัก ณ ที่จ่าย", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "th", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "THB"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "ค่าโอนบ้านใครจ่าย?", "acceptedAnswer": {"@type": "Answer", "text": "กฎหมายไม่ได้บังคับ ขึ้นกับการตกลงในสัญญา ส่วนใหญ่แบ่งค่าธรรมเนียมการโอน 2% คนละครึ่ง ผู้ซื้อจ่ายค่าจดจำนอง ผู้ขายจ่ายภาษีทั้งหมด"}}, {"@type": "Question", "name": "ภาษีธุรกิจเฉพาะได้รับยกเว้นเมื่อไหร่?", "acceptedAnswer": {"@type": "Answer", "text": "เมื่อถือครองเกิน 5 ปี หรือผู้ขายมีชื่อในทะเบียนบ้านหลังนั้นไม่น้อยกว่า 1 ปี (กรณีนี้ต้องเสียอากรแสตมป์ 0.5% แทน)"}}, {"@type": "Question", "name": "ราคาประเมินดูได้จากที่ไหน?", "acceptedAnswer": {"@type": "Answer", "text": "ค้นได้จากเว็บไซต์ของกรมธนารักษ์ หรือแอปพลิเคชัน LandsMaps ของกรมที่ดิน"}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "คิดง่าย", "item": "https://kaveek1-rgb.github.io/kidngai/"}, {"@type": "ListItem", "position": 2, "name": "ค่าโอนบ้าน ค่าธรรมเนียมที่ดิน", "item": "https://kaveek1-rgb.github.io/kidngai/transfer-fee/"}]}</script>
+</head>
+<body data-tool="transfer-fee">
+<header class="top"><div class="wrap"><a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="7" fill="currentColor" opacity=".12"/><rect x="3" y="3" width="26" height="26" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 12h5M12.5 9.5v5M18 12h5M10 20.5h5M18 19h5M18 22h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>คิดง่าย</a><nav><a href="../#tools">เครื่องมือทั้งหมด</a></nav></div></header>
+<main class="wrap">
+<nav class="crumb"><a href="../">คิดง่าย</a> › <a href="../#home">บ้าน รถ และพลังงาน</a> › ค่าโอนบ้าน ค่าธรรมเนียมที่ดิน</nav>
+<h1>ค่าโอนบ้าน / ที่ดิน / คอนโด</h1>
+<p class="lead">ใส่ราคาซื้อขาย ราคาประเมิน และยอดกู้ ระบบคำนวณค่าใช้จ่ายวันโอนที่กรมที่ดินให้ครบทุกรายการ</p>
+<form class="calc" novalidate autocomplete="off">
+<div class="grid2"><label class="field"><span>ราคาซื้อขาย (บาท)</span><input id="price" type="number" inputmode="decimal" value="3000000" min="0"></label><label class="field"><span>ราคาประเมินของกรมที่ดิน (บาท)</span><input id="appraise" type="number" inputmode="decimal" value="2500000" min="0"></label><label class="field"><span>ยอดกู้ธนาคาร (บาท)</span><input id="loan" type="number" inputmode="decimal" value="2700000" min="0"><small>ใส่ 0 ถ้าซื้อเงินสด</small></label><label class="field"><span>ผู้ขายถือครองมาแล้ว (ปี)</span><input id="years" type="number" inputmode="decimal" value="3" min="0" max="50"></label></div><label class="field"><span>ผู้ขายเป็น</span><select id="seller"><option value="person" selected>บุคคลธรรมดา</option><option value="company">นิติบุคคล / โครงการ (หัก 1%)</option></select></label><label class="check"><input id="regHouse" type="checkbox"> ผู้ขายมีชื่อในทะเบียนบ้านเกิน 1 ปี (ยกเว้นภาษีธุรกิจเฉพาะ)</label><label class="check"><input id="promo" type="checkbox"> ใช้มาตรการลดค่าโอน–จดจำนองเหลือ 0.01% (ถ้ามีมาตรการในช่วงนั้น)</label><label class="field"><span>ใครจ่ายค่าโอน 2%</span><select id="split"><option value="half" selected>แบ่งจ่ายคนละครึ่ง</option><option value="buyer">ผู้ซื้อจ่ายทั้งหมด</option><option value="seller">ผู้ขายจ่ายทั้งหมด</option></select></label>
+<div class="result" id="result" aria-live="polite"></div>
+</form>
+<section class="prose"><h2>ค่าใช้จ่ายวันโอนมีอะไรบ้าง</h2>
+<div class="tbl-wrap"><table><thead><tr><th>รายการ</th><th>อัตรา</th><th>ใครจ่ายโดยทั่วไป</th></tr></thead><tbody>
+<tr><td>ค่าธรรมเนียมการโอน</td><td>2% ของราคาประเมิน</td><td>ตกลงกัน (มักคนละครึ่ง)</td></tr>
+<tr><td>ค่าจดจำนอง</td><td>1% ของยอดกู้</td><td>ผู้ซื้อ</td></tr>
+<tr><td>ภาษีธุรกิจเฉพาะ</td><td>3.3% ของราคาที่สูงกว่า (ถือไม่ถึง 5 ปี)</td><td>ผู้ขาย</td></tr>
+<tr><td>อากรแสตมป์</td><td>0.5% (เฉพาะกรณีไม่เสียภาษีธุรกิจเฉพาะ)</td><td>ผู้ขาย</td></tr>
+<tr><td>ภาษีเงินได้หัก ณ ที่จ่าย</td><td>บุคคล: คิดขั้นบันไดตามปีที่ถือครอง / นิติบุคคล: 1%</td><td>ผู้ขาย</td></tr>
+</tbody></table></div>
+<p class="note">ภาษีหัก ณ ที่จ่ายของบุคคลธรรมดาเป็นการประมาณตามหลักเกณฑ์กรมที่ดิน ยอดจริงอาจต่างเล็กน้อย โปรดสอบถามสำนักงานที่ดินก่อนวันโอน</p></section>
+<section class="faq prose"><h2>คำถามที่พบบ่อย</h2><details><summary>ค่าโอนบ้านใครจ่าย?</summary><p>กฎหมายไม่ได้บังคับ ขึ้นกับการตกลงในสัญญา ส่วนใหญ่แบ่งค่าธรรมเนียมการโอน 2% คนละครึ่ง ผู้ซื้อจ่ายค่าจดจำนอง ผู้ขายจ่ายภาษีทั้งหมด</p></details><details><summary>ภาษีธุรกิจเฉพาะได้รับยกเว้นเมื่อไหร่?</summary><p>เมื่อถือครองเกิน 5 ปี หรือผู้ขายมีชื่อในทะเบียนบ้านหลังนั้นไม่น้อยกว่า 1 ปี (กรณีนี้ต้องเสียอากรแสตมป์ 0.5% แทน)</p></details><details><summary>ราคาประเมินดูได้จากที่ไหน?</summary><p>ค้นได้จากเว็บไซต์ของกรมธนารักษ์ หรือแอปพลิเคชัน LandsMaps ของกรมที่ดิน</p></details></section>
+<section class="prose"><h2>เครื่องมือที่เกี่ยวข้อง</h2><div class="tools"><a class="tool" href="../car-loan/" data-k="คำนวณค่างวดรถ ผ่อนรถยนต์ ดอกเบี้ยคงที่ รวม vat"><strong>คำนวณค่างวดรถ</strong><span>ดาวน์ ดอกเบี้ย จำนวนงวด ได้ค่างวดรวม VAT</span></a><a class="tool" href="../home-loan/" data-k="คำนวณผ่อนบ้าน ค่างวดสินเชื่อบ้าน คอนโด ต่อเดือน"><strong>คำนวณผ่อนบ้าน</strong><span>ค่างวดสินเชื่อบ้าน ดอกเบี้ยรวม รายได้ที่ควรมี</span></a><a class="tool" href="../ev-cost/" data-k="คำนวณค่าชาร์จรถ ev เทียบค่าน้ำมัน ต่อกิโลเมตร ต่อเดือน"><strong>ค่าชาร์จรถ EV เทียบน้ำมัน<em class="badge">มาแรง</em></strong><span>ชาร์จบ้าน vs ตู้ชาร์จ vs เติมน้ำมัน ประหยัดเดือนละเท่าไหร่</span></a><a class="tool" href="../solar/" data-k="คำนวณโซลาร์เซลล์ คืนทุนกี่ปี ติดแผงกี่ kw ประหยัดค่าไฟเท่าไหร่"><strong>โซลาร์เซลล์คืนทุนกี่ปี<em class="badge">มาแรง</em></strong><span>ติดโซลาร์บนหลังคาคุ้มไหม ประหยัดค่าไฟปีละเท่าไหร่</span></a><a class="tool" href="../appliance-power/" data-k="คำนวณค่าไฟเครื่องใช้ไฟฟ้า เปิดแอร์ทั้งคืนกี่บาท ต่อเดือน"><strong>ค่าไฟเครื่องใช้ไฟฟ้า / แอร์</strong><span>เปิดแอร์ทั้งคืนกี่บาท ตู้เย็น พัดลม เดือนละเท่าไหร่</span></a><a class="tool" href="../car-tax/" data-k="คำนวณภาษีรถยนต์ประจำปี ต่อภาษีรถกี่บาท ตามซีซี"><strong>ภาษีรถยนต์ประจำปี</strong><span>ต่อภาษีรถเก๋งกี่บาท ตามซีซีและอายุรถ</span></a></div>
+<p><a href="../#tools">ดูเครื่องมือทั้งหมด 30 รายการ →</a></p></section>
+</main>
+<footer><div class="wrap"><span>© 2569 คิดง่าย · เครื่องมือคำนวณภาษาไทย ใช้ฟรี ไม่ต้องสมัคร</span><a href="../about/">เกี่ยวกับเรา</a><a href="../privacy/">นโยบายความเป็นส่วนตัว</a></div></footer>
+
+<script src="../assets/app.js" defer></script>
+<script src="../assets/more.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>คำนวณเกรดเฉลี่ย GPA และ GPAX สะสม | คิดง่าย</title>
+<meta name="description" content="คำนวณเกรดเฉลี่ย GPA ประจำภาคเรียนจากหน่วยกิตและเกรด A B+ B C+ C D+ D F พร้อมคำนวณเกรดเฉลี่ยสะสม GPAX ใช้ฟรี สำหรับนักเรียนนักศึกษา">
+<link rel="canonical" href="https://kaveek1-rgb.github.io/kidngai/gpa/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="คำนวณเกรดเฉลี่ย GPA และ GPAX สะสม | คิดง่าย">
+<meta property="og:description" content="คำนวณเกรดเฉลี่ย GPA ประจำภาคเรียนจากหน่วยกิตและเกรด A B+ B C+ C D+ D F พร้อมคำนวณเกรดเฉลี่ยสะสม GPAX ใช้ฟรี สำหรับนักเรียนนักศึกษา">
+<meta property="og:url" content="https://kaveek1-rgb.github.io/kidngai/gpa/">
+<meta property="og:site_name" content="คิดง่าย">
+<meta property="og:locale" content="th_TH">
+<meta name="theme-color" content="#0d6b5f">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' aria-hidden='true'><rect x='3' y='3' width='26' height='26' rx='7' fill='%230d6b5f' opacity='.12'/><rect x='3' y='3' width='26' height='26' rx='7' fill='none' stroke='%230d6b5f' stroke-width='2'/><path d='M10 12h5M12.5 9.5v5M18 12h5M10 20.5h5M18 19h5M18 22h5' stroke='%230d6b5f' stroke-width='2' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "คำนวณเกรดเฉลี่ย (GPA / GPAX)", "url": "https://kaveek1-rgb.github.io/kidngai/gpa/", "description": "คำนวณเกรดเฉลี่ย GPA ประจำภาคเรียนจากหน่วยกิตและเกรด A B+ B C+ C D+ D F พร้อมคำนวณเกรดเฉลี่ยสะสม GPAX ใช้ฟรี สำหรับนักเรียนนักศึกษา", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "inLanguage": "th", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "THB"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "ทำไม GPAX ไม่เท่ากับค่าเฉลี่ย GPA ของทุกเทอม?", "acceptedAnswer": {"@type": "Answer", "text": "เพราะแต่ละเทอมมีหน่วยกิตไม่เท่ากัน GPAX ต้องถ่วงน้ำหนักด้วยหน่วยกิต"}}, {"@type": "Question", "name": "วิชาที่ได้ S/U หรือ P นับไหม?", "acceptedAnswer": {"@type": "Answer", "text": "ไม่นับในเกรดเฉลี่ย ไม่ต้องใส่วิชานั้นในตาราง"}}, {"@type": "Question", "name": "เกรดเท่าไหร่ถึงได้เกียรตินิยม?", "acceptedAnswer": {"@type": "Answer", "text": "มหาวิทยาลัยส่วนใหญ่กำหนดเกียรตินิยมอันดับ 1 ที่ 3.50 ขึ้นไป และอันดับ 2 ที่ 3.25 ขึ้นไป โดยต้องไม่เคยได้ F หรือ D ตามเงื่อนไขของแต่ละสถาบัน"}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "คิดง่าย", "item": "https://kaveek1-rgb.github.io/kidngai/"}, {"@type": "ListItem", "position": 2, "name": "คำนวณเกรดเฉลี่ย GPA", "item": "https://kaveek1-rgb.github.io/kidngai/gpa/"}]}</script>
+</head>
+<body data-tool="gpa">
+<header class="top"><div class="wrap"><a class="brand" href="../"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="7" fill="currentColor" opacity=".12"/><rect x="3" y="3" width="26" height="26" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 12h5M12.5 9.5v5M18 12h5M10 20.5h5M18 19h5M18 22h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>คิดง่าย</a><nav><a href="../#tools">เครื่องมือทั้งหมด</a></nav></div></header>
+<main class="wrap">
+<nav class="crumb"><a href="../">คิดง่าย</a> › <a href="../#text">ข้อความและเครื่องมือ</a> › คำนวณเกรดเฉลี่ย GPA</nav>
+<h1>คำนวณเกรดเฉลี่ย (GPA / GPAX)</h1>
+<p class="lead">ใส่หน่วยกิตและเกรดของแต่ละวิชา เพื่อดูเกรดเฉลี่ยเทอมนี้ และใส่เกรดสะสมเดิมเพื่อดู GPAX ใหม่</p>
+<form class="calc" novalidate autocomplete="off">
+<div class="tbl-wrap"><table class="gpa-table"><thead><tr><th>วิชา</th><th>หน่วยกิต</th><th>เกรด</th><th></th></tr></thead><tbody id="courses"></tbody></table></div><div><button type="button" class="btn ghost" id="addRow">+ เพิ่มวิชา</button></div><fieldset><legend>เกรดสะสมเดิม (ไม่บังคับ)</legend><div class="grid2"><label class="field"><span>GPAX เดิม</span><input id="prevGpa" type="number" inputmode="decimal" value="" min="0" max="4" step="0.01" placeholder="เช่น 3.25"></label><label class="field"><span>หน่วยกิตสะสมเดิม</span><input id="prevCr" type="number" inputmode="decimal" value="" min="0" step="0.5" placeholder="เช่น 36"></label></div></fieldset>
+<div class="result" id="result" aria-live="polite"></div>
+</form>
+<section class="prose"><h2>วิธีคิดเกรดเฉลี่ย</h2>
+<p><code>GPA = ผลรวม (หน่วยกิต × ค่าเกรด) ÷ ผลรวมหน่วยกิต</code></p>
+<p>ค่าเกรด: A = 4, B+ = 3.5, B = 3, C+ = 2.5, C = 2, D+ = 1.5, D = 1, F = 0 ส่วนใหญ่ตัดทศนิยมเหลือ 2 ตำแหน่งโดยไม่ปัดขึ้น</p>
+<p>GPAX (เกรดเฉลี่ยสะสม) คิดจากทุกวิชาที่เรียนมาทั้งหมด ไม่ใช่การเฉลี่ย GPA ของแต่ละเทอม</p></section>
+<section class="faq prose"><h2>คำถามที่พบบ่อย</h2><details><summary>ทำไม GPAX ไม่เท่ากับค่าเฉลี่ย GPA ของทุกเทอม?</summary><p>เพราะแต่ละเทอมมีหน่วยกิตไม่เท่ากัน GPAX ต้องถ่วงน้ำหนักด้วยหน่วยกิต</p></details><details><summary>วิชาที่ได้ S/U หรือ P นับไหม?</summary><p>ไม่นับในเกรดเฉลี่ย ไม่ต้องใส่วิชานั้นในตาราง</p></details><details><summary>เกรดเท่าไหร่ถึงได้เกียรตินิยม?</summary><p>มหาวิทยาลัยส่วนใหญ่กำหนดเกียรตินิยมอันดับ 1 ที่ 3.50 ขึ้นไป และอันดับ 2 ที่ 3.25 ขึ้นไป โดยต้องไม่เคยได้ F หรือ D ตามเงื่อนไขของแต่ละสถาบัน</p></details></section>
+<section class="prose"><h2>เครื่องมือที่เกี่ยวข้อง</h2><div class="tools"><a class="tool" href="../baht-text/" data-k="แปลงตัวเลขเป็นตัวหนังสือ บาทถ้วน ภาษาไทย ออนไลน์"><strong>แปลงตัวเลขเป็นตัวหนังสือ</strong><span>พิมพ์จำนวนเงิน ได้คำอ่านภาษาไทย “บาทถ้วน” ทันที</span></a><a class="tool" href="../keyboard-fix/" data-k="แปลงภาษาที่พิมพ์ลืมเปลี่ยนแป้น ไทย ↔ อังกฤษ (l;ylfu → สวัสดี)"><strong>แก้ภาษาที่พิมพ์ลืมเปลี่ยน<em class="badge">ใช้บ่อย</em></strong><span>พิมพ์ l;ylfu ได้ สวัสดี ทันที แปลงไทย ↔ อังกฤษ</span></a><a class="tool" href="../thai-count/" data-k="นับตัวอักษรภาษาไทย นับคำ นับจำนวนตัวอักษร ออนไลน์"><strong>นับตัวอักษรภาษาไทย</strong><span>นับตัวอักษร คำ พยางค์ SMS ถูกต้องสำหรับภาษาไทย</span></a><a class="tool" href="../random-wheel/" data-k="วงล้อสุ่มชื่อ หมุนวงล้อจับฉลาก สุ่มรายชื่อ ออนไลน์ ฟรี"><strong>วงล้อสุ่มชื่อ<em class="badge">ยอดนิยม</em></strong><span>หมุนวงล้อสุ่มชื่อ จับฉลาก สุ่มของรางวัล สุ่มเลข</span></a><a class="tool" href="../ev-cost/" data-k="คำนวณค่าชาร์จรถ ev เทียบค่าน้ำมัน ต่อกิโลเมตร ต่อเดือน"><strong>ค่าชาร์จรถ EV เทียบน้ำมัน<em class="badge">มาแรง</em></strong><span>ชาร์จบ้าน vs ตู้ชาร์จ vs เติมน้ำมัน ประหยัดเดือนละเท่าไหร่</span></a><a class="tool" href="../solar/" data-k="คำนวณโซลาร์เซลล์ คืนทุนกี่ปี ติดแผงกี่ kw ประหยัดค่าไฟเท่าไหร่"><strong>โซลาร์เซลล์คืนทุนกี่ปี<em class="badge">มาแรง</em></strong><span>ติดโซลาร์บนหลังคาคุ้มไหม ประหยัดค่าไฟปีละเท่าไหร่</span></a></div>
+<p><a href="../#tools">ดูเครื่องมือทั้งหมด 30 รายการ →</a></p></section>
+</main>
+<footer><div class="wrap"><span>© 2569 คิดง่าย · เครื่องมือคำนวณภาษาไทย ใช้ฟรี ไม่ต้องสมัคร</span><a href="../about/">เกี่ยวกับเรา</a><a href="../privacy/">นโยบายความเป็นส่วนตัว</a></div></footer>
+
+<script src="../assets/app.js" defer></script>
+<script src="../assets/more.js" defer></script>
+</body>
+</html>
