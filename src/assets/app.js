@@ -374,7 +374,35 @@
 
   window.KD = { $, $$, num, val, raw, fmt, fmt0, baht, out, esc, rows, big, bind, parseDate, iso, today, thDate, ymd, ymdText, DAY, progressive, tools };
 
+  // ลิงก์แชร์: ค่าที่กรอกเก็บใน query string (?rate=5&years=20) เปิดลิงก์แล้วได้ผลเดิม
+  function applyQuery() {
+    const q = new URLSearchParams(location.search);
+    if (![...q.keys()].length) return;
+    $$('.calc input[id], .calc select[id]').forEach((e) => {
+      if (!q.has(e.id)) return;
+      if (e.type === 'checkbox') e.checked = q.get(e.id) === '1';
+      else e.value = q.get(e.id);
+    });
+    $$('.calc input[type="radio"]').forEach((e) => { if (q.get(e.name) === e.value) e.checked = true; });
+  }
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-share]');
+    if (!b) return;
+    const q = new URLSearchParams();
+    $$('.calc input[id], .calc select[id]').forEach((i) => {
+      if (i.type === 'checkbox') q.set(i.id, i.checked ? '1' : '0');
+      else if (i.type !== 'radio' && i.value !== '') q.set(i.id, i.value);
+    });
+    $$('.calc input[type="radio"]:checked').forEach((i) => q.set(i.name, i.value));
+    const url = location.origin + location.pathname + '?' + q.toString();
+    history.replaceState(null, '', url);
+    const done = () => { const o = b.textContent; b.textContent = 'คัดลอกลิงก์แล้ว ✓'; setTimeout(() => { b.textContent = o; }, 1800); };
+    if (navigator.share && matchMedia('(pointer:coarse)').matches) navigator.share({ title: document.title, url }).catch(() => {});
+    else if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, () => {});
+  });
+
   document.addEventListener('DOMContentLoaded', () => {
+    applyQuery();
     const tool = document.body.dataset.tool;
     if (tool && tools[tool]) tools[tool]();
 

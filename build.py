@@ -42,7 +42,9 @@ CATS = {
               '<path d="M3 7h18v10H3z"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/>'),
     "home": ("บ้าน รถ และพลังงาน", "ผ่อนบ้าน ผ่อนรถ ค่าไฟ รถ EV โซลาร์เซลล์ ที่ดิน",
              '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>'),
-    "work": ("งานและเกษียณ", "เงินชดเชย ค่า OT บำนาญประกันสังคม วางแผนเกษียณ",
+    "invest": ("ออมและลงทุน", "ดอกเบี้ยทบต้น ดอกเบี้ยเงินฝาก DCA วางแผนเกษียณ พร้อมกราฟ",
+               '<path d="M3 20h18"/><path d="M5 16l5-5 4 3 6-7"/><path d="M15 7h5v5"/>'),
+    "work": ("งานและประกันสังคม", "เงินชดเชย ค่า OT บำนาญประกันสังคม",
              '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>'),
     "health": ("สุขภาพและสิ่งแวดล้อม", "BMI แคลอรี่ ตั้งครรภ์ ฝุ่น PM2.5 ความร้อน",
                '<path d="M12 21s-7-4.5-9-9.5C1.6 7.8 4 4 7.5 4c2 0 3.5 1.2 4.5 2.6C13 5.2 14.5 4 16.5 4 20 4 22.4 7.8 21 11.5 19 16.5 12 21 12 21z"/>'),
@@ -453,8 +455,10 @@ def tool_page(t):
 </main>
 {footer(root)}
 {''.join(f'<script src="{s}" defer></script>' for s in t.get("scripts", []))}
+{f'<script src="{root}assets/chart.js" defer></script>' if t.get("chart") else ''}
 <script src="{root}assets/app.js" defer></script>
 <script src="{root}assets/more.js" defer></script>
+{f'<script src="{root}assets/invest.js" defer></script>' if t["cat"] == "invest" else ''}
 </body>
 </html>
 """
