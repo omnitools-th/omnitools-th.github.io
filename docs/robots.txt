@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kaveek1-rgb.github.io/kidngai/sitemap.xml
+Sitemap: https://omnitools-th.github.io/sitemap.xml

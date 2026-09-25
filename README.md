@@ -14,9 +14,9 @@ docs/             ← เว็บที่สร้างเสร็จ (อ�
 ## ขั้นตอนที่ต้องทำเอง (ทำครั้งเดียว)
 
 1. **ขึ้นเว็บฟรีด้วย GitHub Pages**
-   - สร้าง repo ใหม่ชื่อ `kidngai` บน GitHub แล้ว push โฟลเดอร์นี้ขึ้นไป
+   - อยู่ใน Organization `omnitools-th` repo `omnitools-th.github.io`
    - Settings → Pages → Source: *Deploy from a branch* → Branch `main` โฟลเดอร์ `/docs`
-   - เว็บจะอยู่ที่ `https://kaveek1-rgb.github.io/kidngai/`
+   - เว็บจะอยู่ที่ `https://omnitools-th.github.io/`
 2. **(แนะนำมาก) ซื้อโดเมนของตัวเอง** ประมาณ 300–500 บาท/ปี เช่น `kidngai.com`
    - AdSense มักไม่อนุมัติเว็บที่อยู่ใต้ `github.io`
    - ใส่โดเมนใน Settings → Pages → Custom domain แล้วแก้ `SITE_URL` ใน build.py → รัน build ใหม่ → push

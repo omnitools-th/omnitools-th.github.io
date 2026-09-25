@@ -14,7 +14,7 @@ from pathlib import Path
 SITE_NAME = "คิดง่าย"
 SITE_TAGLINE = "เครื่องมือคำนวณภาษาไทย ใช้ฟรี ไม่ต้องสมัคร"
 # ที่อยู่เว็บจริง (ไม่มี / ปิดท้าย) เช่น https://kidngai.com หรือ https://kaveek1-rgb.github.io/kidngai
-SITE_URL = "https://kaveek1-rgb.github.io/kidngai"
+SITE_URL = "https://omnitools-th.github.io"
 # รหัส Google AdSense เช่น "ca-pub-1234567890123456"  (เว้นว่าง = ยังไม่แสดงโฆษณา)
 ADSENSE_CLIENT = ""
 # รหัสยืนยัน Google Search Console (ค่า content ของ meta google-site-verification) เว้นว่างได้
