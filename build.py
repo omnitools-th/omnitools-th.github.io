@@ -30,7 +30,7 @@ LOGO = ('<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="l
         '<circle cx="23.5" cy="8" r="1.6" fill="#fff"/><circle cx="8.5" cy="12" r="1.1" fill="#fff"/></svg>')
 FAVICON = "data:image/svg+xml," + LOGO.replace('"', "'").replace('#', '%23').replace('<svg ', "<svg xmlns='http://www.w3.org/2000/svg' ")
 
-PLAYERS = ('<details class="panel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary>'
+PLAYERS = ('<details class="panel" id="playersPanel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary>'
            '<div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off">'
            '<button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div>'
            '<p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>')
@@ -241,8 +241,16 @@ GAMES = [
 
 
 from games_sai import GAMES_SAI  # noqa: E402
+from games_easy import GAMES_EASY  # noqa: E402
 BASE_GAMES = list(GAMES)
-GAMES += GAMES_SAI
+for _g in GAMES_EASY:
+    if _g["game"] == "spicy-bottle":
+        _g["stage"] = (f'<div class="stage"><div class="bottle-wrap spicy" id="bottleWrap">{BOTTLE}</div>'
+                       '<div class="result" id="result" aria-live="polite">&nbsp;</div><button class="btn big" id="spin" type="button">หมุนขวด 🔞</button></div>')
+GAMES = GAMES_EASY + GAMES + GAMES_SAI
+# เกมง่าย กดเดียวหาคนดื่ม (แสดงบนสุดของหน้าแรก)
+EASY = ["random-drinker", "crocodile", "spin-the-bottle", "simon-says", "low-card", "shake-champagne",
+        "finger-chooser", "penalty-wheel", "number-bomb", "time-bomb", "drinking-dice"]
 
 # ------------------------------------------------------------------ สายเกม
 VIBES = [
@@ -252,7 +260,7 @@ VIBES = [
          lead="สายเริ่มต้นที่เล่นได้กับทุกวง คำถามขำๆ ไม่ลึกเกินไป เหมาะเปิดวงหรือเล่นกับคนที่เพิ่งรู้จัก",
          samples=["ถ้าถูกหวย 10 ล้าน จะบอกใครเป็นคนแรก", "ฉันไม่เคยนั่งรถผิดสาย", "ใครในวงมีแนวโน้มจะตายเป็นคนแรกในหนังผี",
                   "เลียนแบบเสียงสัตว์ 3 ชนิดติดกัน", "มีแมว 10 ตัว หรือ มีหมา 10 ตัว"]),
-    dict(key="spicy", tag="20+ จีบกัน หยอกกัน", icon="🔥", name="ทะลึ่ง", slug="spicy", adult=True,
+    dict(key="spicy", tag="20+ แรงได้ใจ", icon="🔥", name="ทะลึ่ง 20+", slug="spicy", adult=True,
          title="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้าแบบทะลึ่ง",
          desc="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้า ฉันไม่เคย ใครมีแนวโน้ม เรื่องความรัก การจีบ และความลับหัวใจ ทะลึ่งพอขำ ไม่หยาบ เล่นบนมือถือ",
          lead="คำถามเรื่องจีบ ความรัก และความลับหัวใจ ทะลึ่งพอให้วงกรี๊ด แต่ไม่หยาบคาย สำหรับผู้ที่อายุ 20 ปีขึ้นไป",
@@ -289,7 +297,7 @@ def sai_badge(g, root):
     if not g.get("sai"):
         return ''
     v = vibe_of(g["sai"])
-    adult = ' · 🔞 20+' if g.get("adult") else ''
+    adult = ' 🔞' if g.get("adult") else ''
     return f'<a class="sai-badge v-{v["key"]}" href="{root}{v["slug"]}/">{v["icon"]} เกมประจำสาย{v["name"]}{adult}</a>'
 
 
@@ -344,8 +352,10 @@ def footer(root):
 
 def scripts(root):
     return (f'<script src="{root}assets/data.js" defer></script><script src="{root}assets/packs.js" defer></script>'
-            f'<script src="{root}assets/data2.js" defer></script><script src="{root}assets/app.js" defer></script>'
-            f'<script src="{root}assets/games.js" defer></script><script src="{root}assets/games2.js" defer></script>')
+            f'<script src="{root}assets/data2.js" defer></script><script src="{root}assets/data3.js" defer></script>'
+            f'<script src="{root}assets/app.js" defer></script>'
+            f'<script src="{root}assets/games.js" defer></script><script src="{root}assets/games2.js" defer></script>'
+            f'<script src="{root}assets/games3.js" defer></script>')
 
 
 def game_cards(root, games):
@@ -383,7 +393,7 @@ def game_page(g):
 <p class="lead">{g["lead"]}</p>
 {vibe_bar(g.get("vibe_note", "")) if g.get("vibes") else ''}
 {g["stage"]}
-{PLAYERS if g.get("players") else ''}
+{(PLAYERS.replace('<details class="panel" id="playersPanel">', '<details class="panel" id="playersPanel" open>') if g.get("players_open") else PLAYERS) if g.get("players") else ''}
 <section class="prose">{g["how"]}</section>
 <section class="prose faq"><h2>คำถามที่พบบ่อย</h2>{faq}</section>
 <section class="prose"><h2>เกมอื่นที่เล่นต่อได้เลย</h2>{game_cards(root, others)}
@@ -411,14 +421,18 @@ def index_page():
 <h1>วงไหนเงียบ<br><span>เปิดเว็บนี้</span></h1>
 <p>รวม {len(GAMES)} เกมวงเหล้าและเกมปาร์ตี้ เล่นด้วยมือถือเครื่องเดียว ไม่ต้องโหลดแอป ไม่ต้องสมัคร เปิดแล้วเล่นได้เลย
 ไม่ดื่มก็เล่นได้ แค่กดโหมด “ไม่ดื่ม” บทลงโทษจะเปลี่ยนเป็นภารกิจฮาๆ แทน</p>
-<div class="row" style="justify-content:flex-start"><a class="btn big" href="./card-game/">🃏 เริ่มด้วยไพ่วงเหล้า</a>
+<div class="row" style="justify-content:flex-start"><a class="btn big" href="./random-drinker/">🎰 สุ่มคนดื่มเลย</a>
+<a class="btn alt big" href="./crocodile/">🐊 จระเข้กัด</a>
 <button class="btn alt" type="button" data-install hidden>📲 ติดตั้งลงมือถือ</button></div>
 </section>
+<h2>⚡ เกมง่าย กดเดียวหาคนดื่ม</h2>
+<p class="note">ไม่ต้องอ่านกติกา เปิดแล้วเล่นได้เลย</p>
+{game_cards("./", [next(g for g in GAMES if g["slug"] == s) for s in EASY])}
 <h2>เลือกสายของวง</h2>
 <div class="vibe-cards">{''.join(f'<a class="vibe-card v-{v["key"]}" href="./{v["slug"]}/"><b>{v["icon"]}</b><strong>สาย{v["name"]}</strong><span>{v["tag"]}</span></a>' for v in VIBES)}</div>
-{''.join(f'<h2>{v["icon"]} เกมประจำสาย{v["name"]}' + (' <small class="note">20+</small>' if v.get("adult") else '') + f'</h2>{game_cards("./", [g for g in GAMES if g.get("sai") == v["key"]])}' for v in VIBES)}
-<h2>🎮 เกมยอดฮิต เล่นได้ทุกสาย</h2>
-{game_cards("./", BASE_GAMES)}
+{''.join(f'<h2>{v["icon"]} เกมประจำสาย{v["name"]}' + f'</h2>{game_cards("./", [g for g in GAMES if g.get("sai") == v["key"]])}' for v in VIBES)}
+<h2>🎮 เกมอื่นๆ เล่นได้ทุกสาย</h2>
+{game_cards("./", [g for g in BASE_GAMES if g["slug"] not in EASY])}
 <div class="setup-card"><h2>👥 ใส่ชื่อเพื่อนในวงไว้ก่อน</h2><p class="note">บางเกมจะบอกว่าถึงตาใคร ใส่ตามลำดับที่นั่งวนรอบวง</p>
 <div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off">
 <button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div><span id="playerCount" hidden></span></div>

@@ -94,7 +94,7 @@
   });
 
   // ---------- สายเกม ----------
-  const VIBE_NAMES = { fun: 'ฮา', spicy: 'ทะลึ่ง', drink: 'กิน', deep: 'เจาะใจ', couple: 'คู่รัก', all: 'รวมทุกสาย' };
+  const VIBE_NAMES = { fun: 'ฮา', spicy: 'ทะลึ่ง 20+', drink: 'กิน', deep: 'เจาะใจ', couple: 'คู่รัก', all: 'รวมทุกสาย' };
   function setVibe(v) {
     if (!VIBE_NAMES[v]) v = 'fun';
     if (v === 'spicy' && !S.adult) {
