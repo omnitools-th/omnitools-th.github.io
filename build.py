@@ -31,9 +31,8 @@ LOGO = ('<svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="l
 FAVICON = "data:image/svg+xml," + LOGO.replace('"', "'").replace('#', '%23').replace('<svg ', "<svg xmlns='http://www.w3.org/2000/svg' ")
 
 PLAYERS = ('<details class="panel" id="playersPanel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary>'
-           '<div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off">'
-           '<button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div>'
-           '<p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>')
+           '<div class="plist" id="players"></div><button class="btn alt add-p" id="addPlayer" type="button">+ เพิ่มชื่อ</button>'
+           '<p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ช่องละ 1 คน ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>')
 
 BOTTLE = ('<svg id="bottle" viewBox="0 0 60 200" aria-hidden="true"><defs><linearGradient id="bg" x1="0" x2="1">'
           '<stop offset="0" stop-color="#0b5d3b"/><stop offset=".45" stop-color="#27b57a"/><stop offset="1" stop-color="#0a4a2f"/></linearGradient></defs>'
@@ -434,8 +433,7 @@ def index_page():
 <h2>🎮 เกมอื่นๆ เล่นได้ทุกสาย</h2>
 {game_cards("./", [g for g in BASE_GAMES if g["slug"] not in EASY])}
 <div class="setup-card"><h2>👥 ใส่ชื่อเพื่อนในวงไว้ก่อน</h2><p class="note">บางเกมจะบอกว่าถึงตาใคร ใส่ตามลำดับที่นั่งวนรอบวง</p>
-<div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off">
-<button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div><span id="playerCount" hidden></span></div>
+<div class="plist" id="players"></div><button class="btn alt add-p" id="addPlayer" type="button">+ เพิ่มชื่อ</button><span id="playerCount" hidden></span></div>
 <section class="prose">
 <h2>เกมวงเหล้าเล่นอะไรดี</h2>
 <p>ถ้าวงเพิ่งเริ่ม ลอง <a href="./card-game/">ไพ่วงเหล้า</a> หรือ <a href="./number-bomb/">เลขระเบิด</a> ที่เล่นง่ายและทุกคนได้ร่วม

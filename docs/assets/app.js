@@ -68,16 +68,37 @@
   let turn = 0;
   const players = () => S.players.filter(Boolean);
   function nextPlayer() { const p = players(); if (!p.length) return ''; const n = p[turn % p.length]; turn++; return n; }
-  function renderPlayers() {
+  // ช่องกรอกชื่อ คนละช่อง (S.players เก็บช่องว่างไว้ระหว่างพิมพ์ได้ ส่วน players() กรองออก)
+  const countLabel = () => {
+    const n = players().length;
+    $$('#playerCount').forEach((e) => { e.textContent = n ? `${n} คน` : 'ยังไม่ใส่ชื่อ'; });
+  };
+  function renderPlayers(focus = -1) {
     const box = $('#players');
     if (!box) return;
-    const p = players();
-    $('#playerCount') && ($('#playerCount').textContent = p.length ? `${p.length} คน` : 'ยังไม่ใส่ชื่อ');
-    box.innerHTML = p.map((n, i) => `<span class="chip">${esc(n)}<button type="button" data-rm="${i}" aria-label="ลบ ${esc(n)}">×</button></span>`).join('');
+    while (S.players.length < 2) S.players.push('');
+    box.innerHTML = S.players.map((n, i) => `<div class="prow"><span class="pnum">${i + 1}</span>` +
+      `<input type="text" data-pi="${i}" value="${esc(n)}" placeholder="ชื่อเพื่อนคนที่ ${i + 1}" maxlength="20" autocomplete="off" enterkeyhint="next">` +
+      `<button type="button" data-rm="${i}" aria-label="ลบช่องที่ ${i + 1}">×</button></div>`).join('');
+    countLabel();
+    if (focus >= 0) { const f = $(`[data-pi="${focus}"]`, box); if (f) f.focus(); }
   }
+  const addRow = () => { S.players.push(''); save(); renderPlayers(S.players.length - 1); };
   document.addEventListener('click', (e) => {
     const rm = e.target.closest('[data-rm]');
-    if (rm) { S.players.splice(+rm.dataset.rm, 1); save(); renderPlayers(); }
+    if (rm) { S.players.splice(+rm.dataset.rm, 1); save(); renderPlayers(); return; }
+    if (e.target.closest('#addPlayer')) addRow();
+  });
+  document.addEventListener('input', (e) => {
+    const i = e.target.dataset && e.target.dataset.pi;
+    if (i === undefined) return;
+    S.players[+i] = e.target.value.trim().slice(0, 20); save(); countLabel();
+  });
+  document.addEventListener('keydown', (e) => {
+    const i = e.target.dataset && e.target.dataset.pi;
+    if (i === undefined || e.key !== 'Enter') return;
+    e.preventDefault();
+    if (+i === S.players.length - 1) addRow(); else { const n = $(`[data-pi="${+i + 1}"]`); if (n) n.focus(); }
   });
 
   // ---------- โหมด ----------
@@ -145,15 +166,6 @@
     renderMode();
     renderVibe();
     renderPlayers();
-    const add = $('#addPlayer'), inp = $('#playerName');
-    if (add && inp) {
-      const go = () => {
-        inp.value.split(/[,\n]/).map((s) => s.trim()).filter(Boolean).forEach((n) => S.players.push(n.slice(0, 20)));
-        inp.value = ''; save(); renderPlayers(); inp.focus();
-      };
-      add.addEventListener('click', go);
-      inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
-    }
     // เกมสายทะลึ่ง: ถามอายุก่อนเข้า
     if (document.body.dataset.adult && !S.adult) {
       if (window.confirm('เกมนี้สำหรับผู้ที่มีอายุ 20 ปีขึ้นไปเท่านั้น\nยืนยันว่าทุกคนในวงอายุ 20 ปีขึ้นไป?')) { S.adult = true; save(); }

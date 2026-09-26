@@ -27,7 +27,7 @@
 <p class="lead">คนแสดงแตะดูโจทย์ลับ แล้วมีเวลา 15 วินาทีทำให้วงหัวเราะ ใครหลุดขำต้องโดน ถ้าไม่มีใครขำเลย คนแสดงโดนเอง</p>
 
 <div class="stage"><div class="turn" id="turn"></div><div class="qcard" id="prompt"></div><div class="range" id="timer"></div><div class="result" id="result">&nbsp;</div><button class="btn big" id="startAct" type="button" hidden>เริ่มแสดง 15 วินาที</button><div class="row" id="verdict" hidden><button class="btn" id="laughed" type="button">มีคนหัวเราะ 😂</button><button class="btn alt" id="noLaugh" type="button">ไม่มีใครขำ 😐</button></div><button class="btn ghost" id="nextAct" type="button">คนแสดงคนถัดไป →</button></div>
-<details class="panel" id="playersPanel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary><div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off"><button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div><p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>
+<details class="panel" id="playersPanel"><summary>👥 ผู้เล่น (<span id="playerCount"></span>) – ใส่ชื่อเพื่อให้บอกว่าถึงตาใคร</summary><div class="plist" id="players"></div><button class="btn alt add-p" id="addPlayer" type="button">+ เพิ่มชื่อ</button><p class="note">ใส่ตามลำดับที่นั่งวนรอบวง ช่องละ 1 คน ชื่อจะถูกจำไว้ในมือถือเครื่องนี้ ใช้ได้ทุกเกม</p></details>
 <section class="prose"><h2>วิธีเล่นห้ามหัวเราะ</h2>
 <ol><li>คนแสดงแตะการ์ดเพื่อดูโจทย์ลับ อย่าให้คนอื่นเห็น</li><li>กด “เริ่มแสดง” แล้วแสดงตามโจทย์ให้วงหัวเราะภายใน 15 วินาที</li>
 <li>ถ้ามีใครหลุดหัวเราะหรือยิ้มจนเห็นฟัน คนนั้นโดน ถ้าไม่มีใครขำเลย คนแสดงโดนเอง</li></ol>
