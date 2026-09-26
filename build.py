@@ -240,6 +240,10 @@ GAMES = [
 ]
 
 
+from games_sai import GAMES_SAI  # noqa: E402
+BASE_GAMES = list(GAMES)
+GAMES += GAMES_SAI
+
 # ------------------------------------------------------------------ สายเกม
 VIBES = [
     dict(key="fun", tag="เล่นได้ทุกวง", icon="😂", name="ฮา", slug="funny",
@@ -275,6 +279,18 @@ VIBES = [
                   "พูดสิ่งที่รักในตัวอีกคน 5 ข้อ", "เดตที่บ้านดูหนัง หรือ เดตข้างนอกกินข้าวหรู"]),
 ]
 VIBE_GAMES = ["truth-or-dare", "never-have-i-ever", "most-likely", "would-you-rather", "penalty-wheel"]
+
+
+def vibe_of(key):
+    return next(v for v in VIBES if v["key"] == key)
+
+
+def sai_badge(g, root):
+    if not g.get("sai"):
+        return ''
+    v = vibe_of(g["sai"])
+    adult = ' · 🔞 20+' if g.get("adult") else ''
+    return f'<a class="sai-badge v-{v["key"]}" href="{root}{v["slug"]}/">{v["icon"]} เกมประจำสาย{v["name"]}{adult}</a>'
 
 
 def vibe_bar(note=""):
@@ -328,8 +344,8 @@ def footer(root):
 
 def scripts(root):
     return (f'<script src="{root}assets/data.js" defer></script><script src="{root}assets/packs.js" defer></script>'
-            f'<script src="{root}assets/app.js" defer></script>'
-            f'<script src="{root}assets/games.js" defer></script>')
+            f'<script src="{root}assets/data2.js" defer></script><script src="{root}assets/app.js" defer></script>'
+            f'<script src="{root}assets/games.js" defer></script><script src="{root}assets/games2.js" defer></script>')
 
 
 def game_cards(root, games):
@@ -355,13 +371,15 @@ def game_page(g):
             {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in g["faq"]]},
     ]
     faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in g["faq"])
-    others = [x for x in GAMES if x is not g][:6]
+    same = [x for x in GAMES if x is not g and g.get("sai") and x.get("sai") == g.get("sai")]
+    others = (same + [x for x in GAMES if x is not g and x not in same])[:6]
     body = f"""
-<body data-game="{g["game"]}">
+<body data-game="{g["game"]}"{' data-adult="1"' if g.get("adult") else ''}>
 {header(root)}
 <main class="wrap">
 <nav class="crumb"><a href="{root}">{SITE_NAME}</a> › {g["name"]}</nav>
 <h1>{g["icon"]} {g["h1"]}</h1>
+{sai_badge(g, root)}
 <p class="lead">{g["lead"]}</p>
 {vibe_bar(g.get("vibe_note", "")) if g.get("vibes") else ''}
 {g["stage"]}
@@ -398,8 +416,9 @@ def index_page():
 </section>
 <h2>เลือกสายของวง</h2>
 <div class="vibe-cards">{''.join(f'<a class="vibe-card v-{v["key"]}" href="./{v["slug"]}/"><b>{v["icon"]}</b><strong>สาย{v["name"]}</strong><span>{v["tag"]}</span></a>' for v in VIBES)}</div>
-<h2>เลือกเกม</h2>
-{game_cards("./", GAMES)}
+{''.join(f'<h2>{v["icon"]} เกมประจำสาย{v["name"]}' + (' <small class="note">20+</small>' if v.get("adult") else '') + f'</h2>{game_cards("./", [g for g in GAMES if g.get("sai") == v["key"]])}' for v in VIBES)}
+<h2>🎮 เกมยอดฮิต เล่นได้ทุกสาย</h2>
+{game_cards("./", BASE_GAMES)}
 <div class="setup-card"><h2>👥 ใส่ชื่อเพื่อนในวงไว้ก่อน</h2><p class="note">บางเกมจะบอกว่าถึงตาใคร ใส่ตามลำดับที่นั่งวนรอบวง</p>
 <div class="players-add"><input id="playerName" placeholder="ชื่อเพื่อน (ใส่หลายชื่อคั่นด้วย ,)" autocomplete="off">
 <button class="btn alt" id="addPlayer" type="button">เพิ่ม</button></div><div class="chips" id="players"></div><span id="playerCount" hidden></span></div>
@@ -421,7 +440,9 @@ def index_page():
 
 def vibe_page(v):
     root, url = "../", f'{SITE_URL}/{v["slug"]}/'
-    games = [g for g in GAMES if g["slug"] in VIBE_GAMES or g.get("vibes")]
+    own = [g for g in GAMES if g.get("sai") == v["key"]]
+    games = [g for g in BASE_GAMES if g["slug"] in VIBE_GAMES or g.get("vibes")]
+    own_cards = game_cards(root, own)
     cards = '<div class="games">' + ''.join(
         f'<a class="game" href="{root}{g["slug"]}/?vibe={v["key"]}"><span class="ic" aria-hidden="true">{g["icon"]}</span>'
         f'<div><strong>{g["name"]}</strong><span>{g["card"]}</span></div></a>' for g in games) + '</div>'
@@ -437,7 +458,10 @@ def vibe_page(v):
 <h1>{v["icon"]} เกมวงเหล้าสาย{v["name"]}</h1>
 <p class="lead">{v["lead"]}</p>
 {gate}
-<h2>เลือกเกมที่จะเล่นในสาย{v["name"]}</h2>
+<h2>⭐ เกมประจำสาย{v["name"]}</h2>
+<p class="note">เกมที่ออกแบบมาเพื่อสายนี้โดยเฉพาะ</p>
+{own_cards}
+<h2>เกมคำถามในสาย{v["name"]}</h2>
 {cards}
 <section class="prose">
 <h2>ตัวอย่างคำถามสาย{v["name"]}</h2>

@@ -25,7 +25,10 @@
   const softBag = () => bag(window.WD ? window.WD.softPen : ['ทำภารกิจที่วงเลือก']);
   let nextSoft = null;
   function pen(n = 1) {
-    if (S.mode === 'drink') return n >= 99 ? 'หมดแก้ว!' : `ดื่ม ${S.vibe === 'drink' ? n * 2 : n} จิบ`;
+    if (S.mode === 'drink') {
+      const k = S.vibe === 'drink' ? n * 2 : n;
+      return n >= 99 ? 'หมดแก้ว!' : k > 5 ? 'ดื่มครึ่งแก้ว' : `ดื่ม ${k} จิบ`;
+    }
     if (!nextSoft) nextSoft = softBag();
     return nextSoft();
   }
@@ -150,6 +153,11 @@
       };
       add.addEventListener('click', go);
       inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+    }
+    // เกมสายทะลึ่ง: ถามอายุก่อนเข้า
+    if (document.body.dataset.adult && !S.adult) {
+      if (window.confirm('เกมนี้สำหรับผู้ที่มีอายุ 20 ปีขึ้นไปเท่านั้น\nยืนยันว่าทุกคนในวงอายุ 20 ปีขึ้นไป?')) { S.adult = true; save(); }
+      else { location.href = '../'; return; }
     }
     const g = document.body.dataset.game;
     if (g && window.W.games[g]) window.W.games[g]();
