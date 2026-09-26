@@ -246,7 +246,7 @@ BASE_GAMES = list(GAMES)
 for _g in GAMES_EASY:
     if _g["game"] == "spicy-bottle":
         _g["stage"] = (f'<div class="stage"><div class="bottle-wrap spicy" id="bottleWrap">{BOTTLE}</div>'
-                       '<div class="result" id="result" aria-live="polite">&nbsp;</div><button class="btn big" id="spin" type="button">หมุนขวด 🔞</button></div>')
+                       '<div class="result" id="result" aria-live="polite">&nbsp;</div><button class="btn big" id="spin" type="button">หมุนขวด 😘</button></div>')
 GAMES = GAMES_EASY + GAMES + GAMES_SAI
 # เกมง่าย กดเดียวหาคนดื่ม (แสดงบนสุดของหน้าแรก)
 EASY = ["random-drinker", "crocodile", "spin-the-bottle", "simon-says", "low-card", "shake-champagne",
@@ -260,11 +260,11 @@ VIBES = [
          lead="สายเริ่มต้นที่เล่นได้กับทุกวง คำถามขำๆ ไม่ลึกเกินไป เหมาะเปิดวงหรือเล่นกับคนที่เพิ่งรู้จัก",
          samples=["ถ้าถูกหวย 10 ล้าน จะบอกใครเป็นคนแรก", "ฉันไม่เคยนั่งรถผิดสาย", "ใครในวงมีแนวโน้มจะตายเป็นคนแรกในหนังผี",
                   "เลียนแบบเสียงสัตว์ 3 ชนิดติดกัน", "มีแมว 10 ตัว หรือ มีหมา 10 ตัว"]),
-    dict(key="spicy", tag="20+ แรงได้ใจ", icon="🔥", name="ทะลึ่ง 20+", slug="spicy", adult=True,
+    dict(key="spicy", tag="20+ จีบกัน หยอกกัน", icon="🔥", name="ทะลึ่ง", slug="spicy", adult=True,
          title="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้าแบบทะลึ่ง",
          desc="เกมวงเหล้าสายทะลึ่ง 20+ คำถามจริงหรือกล้า ฉันไม่เคย ใครมีแนวโน้ม เรื่องความรัก การจีบ และความลับหัวใจ ทะลึ่งพอขำ ไม่หยาบ เล่นบนมือถือ",
          lead="คำถามเรื่องจีบ ความรัก และความลับหัวใจ ทะลึ่งพอให้วงกรี๊ด แต่ไม่หยาบคาย สำหรับผู้ที่อายุ 20 ปีขึ้นไป",
-         samples=["ในวงนี้ ใครที่คิดว่าจูบเก่งที่สุด", "ฉันไม่เคยจูบคนที่เพิ่งรู้จักวันเดียว", "ใครในวงมีแนวโน้มจะถูกขอไลน์คืนนี้",
+         samples=["ในวงนี้ ใครน่าจะจีบเก่งที่สุด", "ฉันไม่เคยจูบคนที่เพิ่งรู้จักวันเดียว", "ใครในวงมีแนวโน้มจะถูกขอไลน์คืนนี้",
                   "จีบคนทางขวาด้วยมุกจีบที่เลี่ยนที่สุด", "แฟนหึงมาก หรือ แฟนไม่หึงเลย"]),
     dict(key="drink", tag="ดื่มคูณสอง", icon="🍻", name="กิน", slug="drink-hard",
          title="เกมวงเหล้าสายกิน บทลงโทษดื่มคูณสอง คำถามเรื่องเมา",
