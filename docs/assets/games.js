@@ -280,8 +280,8 @@
         clearInterval(iv); busy = false;
         const a = 1 + Math.floor(rand() * 6), b = 1 + Math.floor(rand() * 6);
         face(d1, a); face(d2, b); ding(); buzz(60);
-        const what = S.mode === 'drink' ? `ดื่ม ${b} จิบ` : pen();
-        res.innerHTML = `<b>${WHO[a - 1]}</b> → <b class="pen">${esc(what)}</b>` + (a === b ? '<br><span class="dbl">ดับเบิล! ทอยต่ออีกรอบ</span>' : '');
+        const what = W.maybeJackpot() || (S.mode === 'drink' ? `ดื่ม ${b} จิบ` : pen());
+        res.innerHTML = `<b>${WHO[a - 1]}</b> → ${W.penHtml(what)}` + (a === b ? '<br><span class="dbl">ดับเบิล! ทอยต่ออีกรอบ</span>' : '');
       }, 60);
     };
     $('#roll').addEventListener('click', roll);
@@ -337,7 +337,9 @@
         if (cs !== lastSeg) { lastSeg = cs; tone(1200, 0.015, 'square', 0.05); }
         if (p < 1) return requestAnimationFrame(step);
         rot %= TAU; spinning = false; ding(); buzz(100);
-        $('#result').innerHTML = `<b class="pen">${esc(L[win])}</b>`;
+        const big = /ครึ่งแก้ว|หมดแก้ว/.test(L[win]);
+        if (big) W.jackpotFx();
+        $('#result').innerHTML = `<b class="pen${big ? ' jackpot' : ''}">${esc((big ? '🎰 ' : '') + L[win])}</b>`;
       };
       requestAnimationFrame(step);
     };

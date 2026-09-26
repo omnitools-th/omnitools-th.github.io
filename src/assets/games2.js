@@ -337,7 +337,7 @@
       [top, bot][winner].className = 'duel-half win'; [top, bot][loser].className = 'duel-half lose';
       const task = S.mode === 'drink' && rand() < 0.3 ? pen(1) : tasks();
       const done = score[winner] >= 3;
-      say(`${why}<br><b>${esc(nm[winner])}</b> ชนะ!<br>${esc(nm[loser])} → <b class="pen">${esc(task)}</b>` + (done ? `<br>🏆 ${esc(nm[winner])} ชนะทั้งแมตช์!` : ''));
+      say(`${why}<br><b>${esc(nm[winner])}</b> ชนะ!<br>${esc(nm[loser])} → ${W.penHtml(task)}` + (done ? `<br>🏆 ${esc(nm[winner])} ชนะทั้งแมตช์!` : ''));
       if (done) score = [0, 0];
       setTimeout(() => { if (state === 'result') state = 'idle-wait'; }, 900);
     };

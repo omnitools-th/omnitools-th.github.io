@@ -60,15 +60,17 @@
       const names = W.players();
       if (names.length < 2) { res.innerHTML = '<span class="warn-line">ใส่ชื่อเพื่อนอย่างน้อย 2 คนก่อน (ช่องด้านล่าง)</span>'; $('#playersPanel').open = true; return; }
       if (busy) return; busy = true; res.innerHTML = '&nbsp;';
-      const win = names[Math.floor(rand() * names.length)], amt = S.mode === 'drink' ? weighted() : pen();
+      const win = names[Math.floor(rand() * names.length)], amt = W.maybeJackpot(true) || (S.mode === 'drink' ? weighted() : pen());
       let k = 0, delay = 50;
       const tick = () => {
         reel1.textContent = names[k % names.length]; reel2.textContent = S.mode === 'drink' ? AMOUNT[k % AMOUNT.length][0] : '🎯 ภารกิจ';
         tone(600 + (k % 5) * 80, 0.02, 'square', 0.05); k++;
         if (delay < 260) { delay *= 1.12; return setTimeout(tick, delay); }
+        const big = W.isJackpot(amt) || /ครึ่งแก้ว|หมดแก้ว/.test(amt);
         reel1.textContent = win; reel2.textContent = amt; busy = false;
         flash(reel1); flash(reel2); boom(); buzz([120, 50, 120]);
-        res.innerHTML = `<b>${esc(win)}</b> → <b class="pen">${esc(amt)}</b>`;
+        if (big) { W.jackpotFx(); $('#slotBox').classList.add('jp'); } else $('#slotBox').classList.remove('jp');
+        res.innerHTML = `<b>${esc(win)}</b> → <b class="pen${big ? ' jackpot' : ''}">${esc(amt)}</b>`;
         hist.innerHTML = `<span>${esc(win)}: ${esc(amt)}</span>` + hist.innerHTML;
       };
       tick();

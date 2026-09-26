@@ -24,15 +24,40 @@
   // ---------- บทลงโทษ ----------
   const softBag = () => bag(window.WD ? window.WD.softPen : ['ทำภารกิจที่วงเลือก']);
   let nextSoft = null;
+  // แจ็คพอต: ทุกบทลงโทษมีโอกาสออกรางวัลใหญ่ (ปิดได้ที่หน้าแรก)
+  const JACKPOT_RATE = 0.06, JP = '🎰 แจ็คพอต! ';
+  const isJackpot = (s) => String(s).startsWith(JP);
+  // คืนข้อความแจ็คพอต หรือ null ถ้าไม่ออก
+  function maybeJackpot(silent) {
+    if (!nextSoft) nextSoft = softBag();
+    if (S.jackpot === false || rand() >= JACKPOT_RATE) return null;
+    if (!silent) setTimeout(jackpotFx, 30);
+    if (S.mode === 'drink') return JP + (rand() < 0.25 ? 'หมดแก้ว!' : 'ดื่มครึ่งแก้ว');
+    return JP + nextSoft() + ' และ ' + nextSoft();
+  }
   function pen(n = 1) {
+    if (!nextSoft) nextSoft = softBag();
+    const jp = n < 99 ? maybeJackpot() : null;
+    if (jp) return jp;
     if (S.mode === 'drink') {
       const k = S.vibe === 'drink' ? n * 2 : n;
       return n >= 99 ? 'หมดแก้ว!' : k > 5 ? 'ดื่มครึ่งแก้ว' : `ดื่ม ${k} จิบ`;
     }
-    if (!nextSoft) nextSoft = softBag();
     return nextSoft();
   }
-  const penText = (s) => s.replace(/\{pen(\d+)\}/g, (_, n) => `<b class="pen">${esc(pen(+n))}</b>`);
+  const penHtml = (p) => `<b class="pen${isJackpot(p) ? ' jackpot' : ''}">${esc(p)}</b>`;
+  const penText = (s) => s.replace(/\{pen(\d+)\}/g, (_, n) => penHtml(pen(+n)));
+  // เอฟเฟกต์แจ็คพอต: จอวาบสีทอง + เสียงสล็อต + สั่น (กันซ้อนภายใน 1.5 วินาที)
+  let jpAt = 0;
+  function jackpotFx() {
+    const now = Date.now(); if (now - jpAt < 1500) return; jpAt = now;
+    let fx = document.getElementById('jackpotFx');
+    if (!fx) { fx = document.createElement('div'); fx.id = 'jackpotFx'; fx.innerHTML = '<span>🎰 JACKPOT 🎰</span>'; document.body.appendChild(fx); }
+    fx.classList.remove('on'); void fx.offsetWidth; fx.classList.add('on');
+    [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.16, 'square', 0.12, i * 0.09));
+    tone(1568, 0.5, 'triangle', 0.14, 0.5);
+    buzz([80, 40, 80, 40, 250]);
+  }
 
   // ---------- เสียง (สร้างเอง ไม่ต้องโหลดไฟล์) ----------
   let ac = null;
@@ -158,7 +183,7 @@
     window.addEventListener('load', () => { navigator.serviceWorker.register($('link[rel=manifest]') ? new URL('sw.js', $('link[rel=manifest]').href).href : 'sw.js').catch(() => {}); });
   }
 
-  window.W = { $, $$, esc, S, save, bank, setVibe, rand, pick, shuffle, bag, pen, penText, tone, boom, ding, buzz, keepAwake, players, nextPlayer, games: {} };
+  window.W = { $, $$, esc, S, save, bank, setVibe, maybeJackpot, jackpotFx, isJackpot, penHtml, rand, pick, shuffle, bag, pen, penText, tone, boom, ding, buzz, keepAwake, players, nextPlayer, games: {} };
 
   document.addEventListener('DOMContentLoaded', () => {
     const qv = new URLSearchParams(location.search).get('vibe');
@@ -166,6 +191,8 @@
     renderMode();
     renderVibe();
     renderPlayers();
+    const jt = $('#jpToggle');
+    if (jt) { jt.checked = S.jackpot !== false; jt.addEventListener('change', () => { S.jackpot = jt.checked; save(); if (jt.checked) jackpotFx(); }); }
     // เกมสายทะลึ่ง: ถามอายุก่อนเข้า
     if (document.body.dataset.adult && !S.adult) {
       if (window.confirm('เกมนี้สำหรับผู้ที่มีอายุ 20 ปีขึ้นไปเท่านั้น\nยืนยันว่าทุกคนในวงอายุ 20 ปีขึ้นไป?')) { S.adult = true; save(); }
