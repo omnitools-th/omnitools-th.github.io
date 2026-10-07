@@ -247,6 +247,11 @@ for _g in GAMES_EASY:
         _g["stage"] = (f'<div class="stage"><div class="bottle-wrap spicy" id="bottleWrap">{BOTTLE}</div>'
                        '<div class="result" id="result" aria-live="polite">&nbsp;</div><button class="btn big" id="spin" type="button">หมุนขวด 😘</button></div>')
 GAMES = GAMES_EASY + GAMES + GAMES_SAI
+import seo  # noqa: E402
+for _g in GAMES:
+    _g["title"] = seo.TITLES.get(_g["slug"], _g["title"])
+    _g["name"] = seo.NAMES.get(_g["slug"], _g["name"])
+ARTICLE_SLUG = "drinking-games"
 # เกมง่าย กดเดียวหาคนดื่ม (แสดงบนสุดของหน้าแรก)
 EASY = ["random-drinker", "crocodile", "spin-the-bottle", "simon-says", "low-card", "shake-champagne",
         "finger-chooser", "penalty-wheel", "number-bomb", "time-bomb", "drinking-dice"]
@@ -254,7 +259,7 @@ EASY = ["random-drinker", "crocodile", "spin-the-bottle", "simon-says", "low-car
 # ------------------------------------------------------------------ สายเกม
 VIBES = [
     dict(key="fun", tag="เล่นได้ทุกวง", icon="😂", name="ฮา", slug="funny",
-         title="เกมวงเหล้าสายฮา คำถามฮาๆ เล่นได้ทุกวง",
+         title="เกมวงเหล้าสนุกๆ สายฮา คำถามฮาๆ เล่นได้ทุกวง",
          desc="รวมเกมวงเหล้าสายฮา คำถามจริงหรือกล้า ฉันไม่เคย ใครมีแนวโน้มที่สุด แบบขำๆ เล่นได้ทุกวง ทั้งเพื่อนสนิทและคนเพิ่งรู้จัก",
          lead="สายเริ่มต้นที่เล่นได้กับทุกวง คำถามขำๆ ไม่ลึกเกินไป เหมาะเปิดวงหรือเล่นกับคนที่เพิ่งรู้จัก",
          samples=["ถ้าถูกหวย 10 ล้าน จะบอกใครเป็นคนแรก", "ฉันไม่เคยนั่งรถผิดสาย", "ใครในวงมีแนวโน้มจะตายเป็นคนแรกในหนังผี",
@@ -279,7 +284,7 @@ VIBES = [
                   "ใครในวงมีแนวโน้มจะยิ้มทั้งที่ข้างในเศร้า", "ขอบคุณคนในวงที่เคยช่วยคุณ พร้อมบอกเหตุผล",
                   "รู้ความจริงที่เจ็บปวด หรือ อยู่กับคำโกหกที่มีความสุข"]),
     dict(key="couple", tag="เล่นกับแฟน 2 คน", icon="💑", name="คู่รัก", slug="couple",
-         title="เกมคู่รัก คำถามคู่รัก จริงหรือกล้าสำหรับแฟน เล่น 2 คน",
+         title="เกมวงเหล้ากับแฟน เกมคู่รัก 2 คน คำถามคู่รัก เล่นในโทรศัพท์",
          desc="เกมสำหรับคู่รักเล่น 2 คน คำถามคู่รัก จริงหรือกล้าสำหรับแฟน ใครมีแนวโน้มจะงอนก่อน ฉันไม่เคย ช่วยให้รู้จักกันมากขึ้น เล่นบนมือถือเครื่องเดียว",
          lead="เล่นกันสองคนกับแฟน ผลัดกันตอบคำถาม ท้าทายกันน่ารักๆ และได้รู้เรื่องที่ไม่เคยรู้ของอีกคน",
          samples=["ช่วงไหนที่รู้ว่ารักอีกคนจริงๆ", "ฉันไม่เคยแอบอ่านแชตแฟน", "ในเราสองคน ใครมีแนวโน้มจะงอนก่อน",
@@ -397,7 +402,7 @@ def game_page(g):
 <section class="prose">{g["how"]}</section>
 <section class="prose faq"><h2>คำถามที่พบบ่อย</h2>{faq}</section>
 <section class="prose"><h2>เกมอื่นที่เล่นต่อได้เลย</h2>{game_cards(root, others)}
-<p><a href="{root}">ดูเกมทั้งหมด {len(GAMES)} เกม →</a></p></section>
+<p><a href="{root}">ดูเกมทั้งหมด {len(GAMES)} เกม →</a> · <a href="{root}{ARTICLE_SLUG}/">รวมเกมวงเหล้าพร้อมวิธีเล่น →</a></p></section>
 </main>
 {footer(root)}
 {scripts(root)}
@@ -408,19 +413,23 @@ def game_page(g):
 
 
 def index_page():
-    desc = (f"รวม {len(GAMES)} เกมวงเหล้าและเกมปาร์ตี้บนมือถือ ไพ่วงเหล้า จริงหรือกล้า หมุนขวด เลขระเบิด ระเบิดเวลา "
-            "วางนิ้วสุ่มคน ใบ้คำ เล่นฟรี ไม่ต้องโหลดแอป มีโหมดไม่ดื่ม")
+    desc = (f"เกมวงเหล้าออนไลน์ {len(GAMES)} เกม เล่นในโทรศัพท์ได้ทันที จระเข้กัด หมุนขวด นิ้วจิ้ม สุ่มคนดื่ม ไพ่วงเหล้า "
+            "คำถามวงเหล้า จริงหรือกล้า เกมวงเหล้า 2 คนกับแฟน ฟรี ไม่ต้องโหลดแอป มีโหมดไม่ดื่ม")
     lds = [{"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/", "inLanguage": "th"},
            {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [
-               {"@type": "ListItem", "position": i + 1, "name": g["name"], "url": f'{SITE_URL}/{g["slug"]}/'} for i, g in enumerate(GAMES)]}]
+               {"@type": "ListItem", "position": i + 1, "name": g["name"], "url": f'{SITE_URL}/{g["slug"]}/'} for i, g in enumerate(GAMES)]},
+           {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+               {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in seo.HOME_FAQ]}]
     body = f"""
 <body>
 {header("./")}
 <main class="wrap">
 <section class="hero">
-<h1>วงไหนเงียบ<br><span>เปิดเว็บนี้</span></h1>
-<p>รวม {len(GAMES)} เกมวงเหล้าและเกมปาร์ตี้ เล่นด้วยมือถือเครื่องเดียว ไม่ต้องโหลดแอป ไม่ต้องสมัคร เปิดแล้วเล่นได้เลย
-ไม่ดื่มก็เล่นได้ แค่กดโหมด “ไม่ดื่ม” บทลงโทษจะเปลี่ยนเป็นภารกิจฮาๆ แทน</p>
+<p class="eyebrow">วงไหนเงียบ เปิดเว็บนี้ 🍻</p>
+<h1>เกมวงเหล้า<br><span>เล่นในโทรศัพท์ได้เลย</span></h1>
+<p>รวม {len(GAMES)} เกมวงเหล้าสนุกๆ เล่นด้วยโทรศัพท์เครื่องเดียว ไม่ต้องโหลดแอป ไม่ต้องมีไพ่ ขวด หรือลูกเต๋า
+มีทั้งจระเข้กัด หมุนขวด นิ้วจิ้ม คำถามวงเหล้า และเกมวงเหล้า 2 คนกับแฟน ไม่ดื่มก็เล่นได้ แค่กดโหมด “ไม่ดื่ม”</p>
+<p><a href="./{ARTICLE_SLUG}/">📖 ดูรวมเกมวงเหล้าทั้งหมด พร้อมวิธีเล่น →</a></p>
 <div class="row" style="justify-content:flex-start"><a class="btn big" href="./random-drinker/">🎰 สุ่มคนดื่มเลย</a>
 <a class="btn alt big" href="./crocodile/">🐊 จระเข้กัด</a>
 <button class="btn alt" type="button" data-install hidden>📲 ติดตั้งลงมือถือ</button></div>
@@ -443,13 +452,14 @@ def index_page():
 ถ้าอยากให้ตื่นเต้น ลอง <a href="./time-bomb/">ระเบิดเวลา</a> และ <a href="./charades/">ใบ้คำ</a> แบ่งทีมแข่งกัน</p>
 <p><b>เล่นในร้านเน็ตไม่ดีก็ได้:</b> เปิดเว็บนี้ครั้งแรกตอนมีเน็ต ครั้งต่อไปจะเปิดได้แม้สัญญาณอ่อน และบันทึกลงหน้าจอหลักให้เหมือนแอปได้</p>
 </section>
+<section class="prose faq"><h2>คำถามเกี่ยวกับเกมวงเหล้า</h2>{''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in seo.HOME_FAQ)}</section>
 </main>
 {footer("./")}
 {scripts("./")}
 </body>
 </html>
 """
-    write("index.html", head(f"{SITE_NAME} – รวมเกมวงเหล้า เกมปาร์ตี้ เล่นบนมือถือ ฟรี", desc, SITE_URL + "/", "./", lds) + body)
+    write("index.html", head(f"เกมวงเหล้า ออนไลน์ {len(GAMES)} เกม เล่นในโทรศัพท์ฟรี ไม่ต้องโหลดแอป | {SITE_NAME}", desc, SITE_URL + "/", "./", lds) + body)
 
 
 def vibe_page(v):
@@ -493,6 +503,72 @@ def vibe_page(v):
     write(f'{v["slug"]}/index.html', head(f'{v["title"]} | {SITE_NAME}', v["desc"], url, root, lds) + body)
 
 
+def article_page():
+    root, url = "../", f"{SITE_URL}/{ARTICLE_SLUG}/"
+    by = {g["slug"]: g for g in GAMES}
+    total = len(GAMES) + len(seo.CLASSIC)
+    title = f"รวม {total} เกมวงเหล้า สนุกๆ ยอดฮิต {BE} พร้อมวิธีเล่น เล่นในโทรศัพท์ได้ทันที"
+    desc = (f"รวม {total} เกมวงเหล้าสนุกๆ ปี {BE} พร้อมวิธีเล่นทุกเกม ทั้งเกมง่ายกดเดียวรู้ผล จระเข้กัด หมุนขวด นิ้วจิ้ม "
+            "คำถามวงเหล้า เกมไพ่ เกมวงเหล้า 2 คนกับแฟน และเกมที่ไม่ต้องใช้อุปกรณ์ กดเล่นในโทรศัพท์ได้ทันที")
+    toc, sections, n, items = [], [], 0, []
+    for gi, (head_t, intro, slugs) in enumerate(seo.ARTICLE_GROUPS):
+        aid = f"g{gi + 1}"
+        toc.append(f'<li><a href="#{aid}">{head_t}</a></li>')
+        parts = []
+        for sl in slugs:
+            g = by.get(sl)
+            if not g:
+                continue
+            n += 1
+            items.append((g["name"], f'{SITE_URL}/{g["slug"]}/'))
+            adult = ' <small class="note">(20+)</small>' if g.get("adult") else ''
+            parts.append(f'<div class="art-game"><h3>{n}. {g["icon"]} {g["name"]}{adult}</h3><p>{g["lead"]}</p>'
+                         f'<p class="note">{g["card"]}</p><a class="btn alt" href="{root}{g["slug"]}/">▶ เล่น{g["name"]}เลย</a></div>')
+        sections.append(f'<section id="{aid}"><h2>{head_t}</h2><p>{intro}</p>{"".join(parts)}</section>')
+    toc.append('<li><a href="#classic">เกมวงเหล้าไม่ต้องใช้อุปกรณ์</a></li>')
+    classic = []
+    for name, how in seo.CLASSIC:
+        n += 1
+        classic.append(f'<div class="art-game"><h3>{n}. ✋ {name}</h3><p>{how}</p></div>')
+    sections.append('<section id="classic"><h2>เกมวงเหล้าไม่ต้องใช้อุปกรณ์</h2>'
+                    '<p>เกมคลาสสิกที่ใช้แค่มือกับปาก เล่นได้ทุกที่ แม้โทรศัพท์แบตหมด</p>' + ''.join(classic) + '</section>')
+    lds = [
+        {"@context": "https://schema.org", "@type": "Article", "headline": title, "inLanguage": "th", "url": url,
+         "datePublished": "2026-10-08", "dateModified": TODAY, "author": {"@type": "Organization", "name": SITE_NAME},
+         "publisher": {"@type": "Organization", "name": SITE_NAME}},
+        {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": nm, "url": u} for i, (nm, u) in enumerate(items)]},
+        {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in seo.HOME_FAQ]},
+    ]
+    faq = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q, a in seo.HOME_FAQ)
+    body = f"""
+<body>
+{header(root)}
+<main class="wrap prose article">
+<nav class="crumb"><a href="{root}">{SITE_NAME}</a> › รวมเกมวงเหล้า</nav>
+<h1>รวม {total} เกมวงเหล้า สนุกๆ ยอดฮิต ปี {BE} พร้อมวิธีเล่น</h1>
+<p class="lead">วงเงียบ ไม่รู้จะเล่นอะไร? นี่คือรวมเกมวงเหล้าที่คนไทยเล่นกันบ่อยที่สุด แบ่งตามสไตล์ของวง ทุกเกมที่มีปุ่ม “เล่นเลย”
+กดแล้วเล่นในโทรศัพท์ได้ทันที ไม่ต้องโหลดแอป ไม่ต้องมีไพ่ ขวด หรือลูกเต๋า</p>
+<div class="toc"><b>สารบัญ</b><ol>{''.join(toc)}</ol></div>
+{''.join(sections)}
+<section><h2>เลือกเกมวงเหล้ายังไงให้วงไม่เงียบ</h2>
+<ul><li><b>วงเพิ่งเริ่ม:</b> เริ่มด้วยเกมคำถามเบาๆ อย่างฉันไม่เคย หรือไพ่วงเหล้า ให้ทุกคนได้คุยกัน</li>
+<li><b>วงเริ่มเมา:</b> เปลี่ยนเป็นเกมง่ายกดเดียวรู้ผล เช่น จระเข้กัด สุ่มคนดื่ม หมุนขวด</li>
+<li><b>วงใหญ่ 6 คนขึ้นไป:</b> ใบ้คำ ใครคือสปาย หรือระเบิดเวลา สนุกที่สุด</li>
+<li><b>เล่นกับแฟน 2 คน:</b> ใจตรงกันไหม ดวลความไว และจริงหรือกล้าสายคู่รัก</li></ul>
+<p><b>ดื่มอย่างรับผิดชอบ:</b> สลับดื่มน้ำเปล่า เมาไม่ขับ และกดโหมด “ไม่ดื่ม” ได้เสมอสำหรับเพื่อนที่ไม่ดื่ม</p></section>
+<section class="faq"><h2>คำถามที่พบบ่อย</h2>{faq}</section>
+<p><a class="btn big" href="{root}">🍻 ไปหน้ารวมเกมทั้งหมด</a></p>
+</main>
+{footer(root)}
+{scripts(root)}
+</body>
+</html>
+"""
+    write(f"{ARTICLE_SLUG}/index.html", head(f"{title} | {SITE_NAME}", desc, url, root, lds) + body)
+
+
 def simple_page(slug, title, content):
     root = "../"
     body = (f'<body>{header(root)}<main class="wrap prose"><nav class="crumb"><a href="{root}">{SITE_NAME}</a> › {title}</nav>'
@@ -514,7 +590,7 @@ def static_pages():
 
 
 def seo_and_pwa():
-    urls = [SITE_URL + "/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f'{SITE_URL}/{v["slug"]}/' for v in VIBES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
+    urls = [SITE_URL + "/", f"{SITE_URL}/{ARTICLE_SLUG}/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f'{SITE_URL}/{v["slug"]}/' for v in VIBES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + '</urlset>\n')
     if ADSENSE_CLIENT:
@@ -574,6 +650,7 @@ def main():
         game_page(g)
     for v in VIBES:
         vibe_page(v)
+    article_page()
     static_pages()
     seo_and_pwa()
     print(f"สร้างเสร็จ {sum(1 for _ in OUT.rglob('*.html'))} หน้า -> {OUT}")
