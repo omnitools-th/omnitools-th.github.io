@@ -516,7 +516,18 @@ def seo_and_pwa():
     urls = [SITE_URL + "/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f'{SITE_URL}/{v["slug"]}/' for v in VIBES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + '</urlset>\n')
-    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n")
+    write("sitemap.txt", "\n".join(urls) + "\n")
+    write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\nSitemap: {SITE_URL}/sitemap.txt\n")
+    # หน้า 404: ลิงก์เก่าที่ไม่มีแล้ว (เช่น หน้าคิดง่ายเดิม) ให้เจอหน้ารวมเกมแทน
+    root = SITE_URL + "/"
+    write("404.html", head(f"ไม่พบหน้านี้ | {SITE_NAME}", "ไม่พบหน้าที่ต้องการ เลือกเกมวงเหล้าเล่นต่อได้เลย", root, root).replace(
+        '<link rel="canonical"', '<meta name="robots" content="noindex"><link rel="canonical"') +
+          f'<body>{header(root)}<main class="wrap"><section class="hero"><h1>หาหน้านี้ไม่เจอ 🍻</h1>'
+          f'<p>หน้านี้อาจถูกย้ายหรือลบไปแล้ว แต่วงยังไม่เงียบ! เลือกเกมเล่นต่อได้เลย</p>'
+          f'<div class="row" style="justify-content:flex-start"><a class="btn big" href="{root}random-drinker/">🎰 สุ่มคนดื่ม</a>'
+          f'<a class="btn alt big" href="{root}">ดูเกมทั้งหมด</a></div></section>'
+          f'<h2>⚡ เกมง่าย กดเดียวหาคนดื่ม</h2>{game_cards(root, [next(g for g in GAMES if g["slug"] == x) for x in EASY])}</main>'
+          f'{footer(root)}{scripts(root)}</body></html>')
     write(".nojekyll", "")
     icon = LOGO.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ')
     write("icon.svg", icon)
