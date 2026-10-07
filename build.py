@@ -14,7 +14,7 @@ from pathlib import Path
 SITE_NAME = "วงไม่เงียบ"
 SITE_TAGLINE = "รวมเกมวงเหล้า เกมปาร์ตี้ เล่นบนมือถือเครื่องเดียว"
 SITE_URL = "https://wongmaingiap.com"   # ไม่มี / ปิดท้าย
-ADSENSE_CLIENT = ""
+ADSENSE_CLIENT = "ca-pub-7884714333854823"
 GOOGLE_VERIFY = ""
 # ====================================================================
 
@@ -309,7 +309,8 @@ def vibe_bar(note=""):
 
 # ------------------------------------------------------------------ แม่แบบ
 def head(title, desc, canonical, root, lds=()):
-    ad = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>'
+    ad = (f'<meta name="google-adsense-account" content="{ADSENSE_CLIENT}">'
+          f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT}" crossorigin="anonymous"></script>'
           if ADSENSE_CLIENT else '')
     verify = f'<meta name="google-site-verification" content="{html.escape(GOOGLE_VERIFY)}">' if GOOGLE_VERIFY else ''
     ld = ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in lds)
@@ -516,6 +517,8 @@ def seo_and_pwa():
     urls = [SITE_URL + "/"] + [f'{SITE_URL}/{g["slug"]}/' for g in GAMES] + [f'{SITE_URL}/{v["slug"]}/' for v in VIBES] + [f"{SITE_URL}/about/", f"{SITE_URL}/privacy/"]
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + ''.join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls) + '</urlset>\n')
+    if ADSENSE_CLIENT:
+        write("ads.txt", f"google.com, {ADSENSE_CLIENT.replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n")
     write("sitemap.txt", "\n".join(urls) + "\n")
     write("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\nSitemap: {SITE_URL}/sitemap.txt\n")
     # หน้า 404: ลิงก์เก่าที่ไม่มีแล้ว (เช่น หน้าคิดง่ายเดิม) ให้เจอหน้ารวมเกมแทน
