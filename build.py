@@ -13,7 +13,7 @@ from pathlib import Path
 # ============================== CONFIG ==============================
 SITE_NAME = "วงไม่เงียบ"
 SITE_TAGLINE = "รวมเกมวงเหล้า เกมปาร์ตี้ เล่นบนมือถือเครื่องเดียว"
-SITE_URL = "https://omnitools-th.github.io"   # ไม่มี / ปิดท้าย
+SITE_URL = "https://wongmaingiap.com"   # ไม่มี / ปิดท้าย
 ADSENSE_CLIENT = ""
 GOOGLE_VERIFY = ""
 # ====================================================================

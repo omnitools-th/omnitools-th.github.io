@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://omnitools-th.github.io/sitemap.xml
-Sitemap: https://omnitools-th.github.io/sitemap.txt
+Sitemap: https://wongmaingiap.com/sitemap.xml
+Sitemap: https://wongmaingiap.com/sitemap.txt
